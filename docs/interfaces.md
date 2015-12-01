@@ -93,7 +93,7 @@
   
         String userId // 执行此操作的用户Id
         String token // 用户本次登陆的token
-        String workLateId // 加班对象Id  
+        String worklateId // 加班对象Id  
 返回：  
 
         data: null    
@@ -134,7 +134,7 @@
         String userId // 执行此操作的用户Id
         String token // 用户本次登陆的token
         // 以下四者可以结合服务端的Model封装成加班对象。
-        String worklateId // 请假对象Id
+        String leaveId // 请假对象Id
         long startTime // 请假开始时间
         long duration // 请假持续时间
         String reason // 请假缘由  
@@ -147,7 +147,7 @@
   
         String userId // 执行此操作的用户Id
         String token // 用户本次登陆的token
-        String workLateId // 请假对象Id  
+        String leaveId // 请假对象Id  
 返回：  
 
         data: null  
