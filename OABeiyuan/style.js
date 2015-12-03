@@ -68,19 +68,7 @@ module.exports = StyleSheet.create({
     marginLeft: 15,
     marginRight: 15,
   },
-  loginBtnHighLight: {
-    borderRadius: 5,
+  userOptionPanel: {
+    marginTop: 70,
   },
-  loginBtn: {
-    height: 35,
-    backgroundColor: '7FB14D',
-    borderRadius: 5,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  loginBtnText: {
-    color: '#FFFFFF',
-    fontSize: 18,
-  },
-  
 });

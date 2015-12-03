@@ -8,7 +8,6 @@ var {
   StyleSheet,
   Text,
   View,
-  Platform,
   Image,
   TextInput,
   SwitchIOS,
@@ -19,18 +18,19 @@ var {
   AlertIOS,
 } = React;
 
-// Views
+// Elements
+var AppButton = require('./App/Views/Elements/AppButton'); // 系统主题按钮
 // Styles
 var styles = require('./style');
 
-(Platform.OS === 'ios') ? StatusBarIOS.setStyle('light-content', false): null;
+Platform.OS === 'ios' ? StatusBarIOS.setStyle('light-content', false): null;
 
 var OABeiyuan = React.createClass({
   render: function() {
     return (
       <View style={styles.container}>
         <View style={styles.welcomePanel}>
-          <Text style={styles.welcomeText}>
+          <Text style={styles.welcomeText} >
             欢迎使用贝源OA
           </Text>
           <Image
@@ -59,13 +59,7 @@ var OABeiyuan = React.createClass({
           </View>
         </View>
         <View style={styles.loginBtnPanel}>
-          <TouchableHighlight style={styles.loginBtnHighLight} onPress={this.onPressLogin}>
-            <View style={styles.loginBtn}>
-              <Text style={styles.loginBtnText} >
-                登录
-              </Text>
-            </View>
-          </TouchableHighlight>
+          <AppButton text="登录" onPress={this.onPressLogin} />
         </View>
         <View>
         </View>
@@ -81,11 +75,11 @@ var OABeiyuan = React.createClass({
           {text: 'OK', onPress: () => console.log('OK Pressed!')},
           {text: 'Cancel', onPress: () => console.log('Cancel Pressed!'), style: 'cancel'},
         ]
-      )
+      );
     } else {
       ToastAndroid.show('Login...', ToastAndroid.SHORT);
     }
-  }
+  },
 });
 
 AppRegistry.registerComponent('OABeiyuan', () => OABeiyuan);
