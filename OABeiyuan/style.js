@@ -4,14 +4,14 @@ var React = require('react-native');
 
 var {
   StyleSheet,
+  Platform,
 } = React;
 
 module.exports = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    backgroundColor: '#7FB14D',
-    paddingTop: 20,
+    backgroundColor: '#F0F0F0',
   },
   colSeparator: {
     borderTopColor: '#D2D2D2',
@@ -19,8 +19,10 @@ module.exports = StyleSheet.create({
     marginLeft: 50,
   },
   welcomePanel: {
+    backgroundColor: '#7FB14D',
     flexDirection: 'column',
     alignItems: 'center',
+    paddingTop: (Platform.OS === 'ios') ? 20 : 0,
   },
   welcomeText: {
     fontSize: 20,
@@ -61,4 +63,24 @@ module.exports = StyleSheet.create({
     height: 43,
     borderWidth: 0,
   },
+  loginBtnPanel: {
+    marginTop: 70,
+    marginLeft: 15,
+    marginRight: 15,
+  },
+  loginBtnHighLight: {
+    borderRadius: 5,
+  },
+  loginBtn: {
+    height: 35,
+    backgroundColor: '7FB14D',
+    borderRadius: 5,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  loginBtnText: {
+    color: '#FFFFFF',
+    fontSize: 18,
+  },
+  
 });
