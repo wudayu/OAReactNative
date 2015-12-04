@@ -10,7 +10,6 @@ var {
 module.exports = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'column',
     backgroundColor: '#F0F0F0',
   },
   colSeparator: {
@@ -35,7 +34,7 @@ module.exports = StyleSheet.create({
     marginTop: 20,
     marginBottom: 20,
   },
-  input: {
+  inputPanel: {
     backgroundColor: '#FFFFFF',
     height: 88,
     borderTopColor: '#D2D2D2',
@@ -69,6 +68,16 @@ module.exports = StyleSheet.create({
     marginRight: 15,
   },
   userOptionPanel: {
-    marginTop: 70,
+    flexDirection: 'row',
+    borderWidth: 0,
+    position: 'absolute',
+    bottom: 25,
+    left:0,
+    right:0,
+    flex: 1,
+    justifyContent: 'space-around',
+  },
+  appNegButton: {
+    width: 130,
   },
 });

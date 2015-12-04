@@ -20,6 +20,7 @@ var {
 
 // Elements
 var AppButton = require('./App/Views/Elements/AppButton'); // 系统主题按钮
+var AppNegButton = require('./App/Views/Elements/AppNegButton'); // 系统主题镂空按钮
 // Styles
 var styles = require('./style');
 
@@ -41,7 +42,7 @@ var OABeiyuan = React.createClass({
             请登录
           </Text>
         </View>
-        <View style={styles.input}>
+        <View style={styles.inputPanel}>
           <View style={styles.inputRow}>
             <Image
               style={styles.inputImg}
@@ -61,7 +62,9 @@ var OABeiyuan = React.createClass({
         <View style={styles.loginBtnPanel}>
           <AppButton text="登录" onPress={this.onPressLogin} />
         </View>
-        <View>
+        <View style={styles.userOptionPanel}>
+          <AppNegButton text="忘记密码？" onPress={this.onPressLogin} style={styles.appNegButton} />
+          <AppNegButton text="立即注册" onPress={this.onPressLogin} style={styles.appNegButton} />
         </View>
       </View>
     );
