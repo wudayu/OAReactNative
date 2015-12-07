@@ -38,9 +38,9 @@ var OABeiyuan = React.createClass({
       userPwd: text.text,
     });
   },
-  _onClickRemPwd: function(checked: Object) {
+  _onClickRemPwd: function(checked) {
     this.setState({
-      remPwd: checked.checked,
+      remPwd: checked,
     })
   },
   getInitialState: function() {
@@ -99,7 +99,7 @@ var OABeiyuan = React.createClass({
           <AppCheckBox
             text='记住密码'
             checked={this.state.remPwd}
-            onPress={(checked) => this._onClickRemPwd({checked})}
+            onPress={(checked) => this.setState({remPwd : checked})}
           />
         </View>
         <View style={styles.loginBtnPanel}>

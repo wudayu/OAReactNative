@@ -2,7 +2,7 @@
  * Usage:
  * 属性：
  *  text: 用作显示此CheckBox后方的文字
- *  onPress: 点击事件
+ *  onPress: 点击事件，需要在调用时Hook（setState）此控件的checked属性
  */
 
 'use strict';
@@ -21,19 +21,10 @@ var styles = require('./style');
 
 var AppNegButton = React.createClass({
 
-  _onPress: function(checked: Object) {
-    this.setState({
-      checked: !this.state.checked,
-    });
-
+  _onPress: function(checked) {
     if (this.props.hasOwnProperty('onPress')) {
-      this.props.onPress(checked);
+      this.props.onPress(!checked);
     }
-  },
-  getInitialState() {
-    return {
-      checked: this.props.checked,
-    };
   },
   render: function() {
     return (
@@ -41,11 +32,11 @@ var AppNegButton = React.createClass({
         <TouchableOpacity
           activeOpacity="0.5"
           style={styles.btnHighLight}
-          onPress={(checked) => this._onPress({checked})}>
+          onPress={() => this._onPress(this.props.checked)}>
           <Image
             style={styles.cbImg}
             source={
-              this.state.checked ?
+              this.props.checked ?
                 require('image!icon_remem_positive_login_ac') :
                 require('image!icon_remem_negative_login_ac')
             }
