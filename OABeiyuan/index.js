@@ -38,11 +38,6 @@ var OABeiyuan = React.createClass({
       userPwd: text.text,
     });
   },
-  _onClickRemPwd: function(checked) {
-    this.setState({
-      remPwd: checked,
-    })
-  },
   getInitialState: function() {
     return {
       userName: null,
