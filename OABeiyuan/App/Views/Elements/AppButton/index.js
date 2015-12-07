@@ -21,7 +21,9 @@ var styles = require('./style');
 var AppButton = React.createClass({
 
   _onPress: function() {
-    this.props.onPress();
+    if (this.props.hasOwnProperty('onPress')) {
+      this.props.onPress();
+    }
   },
   render: function() {
     return (

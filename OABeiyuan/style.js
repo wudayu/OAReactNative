@@ -62,8 +62,15 @@ module.exports = StyleSheet.create({
     height: 43,
     borderWidth: 0,
   },
+  remPwdPanel: {
+    marginTop: 25,
+    marginBottom: 25,
+    marginLeft: 15,
+    height: 25,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
   loginBtnPanel: {
-    marginTop: 70,
     marginLeft: 15,
     marginRight: 15,
   },
