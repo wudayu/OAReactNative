@@ -68,7 +68,7 @@ BackAndroid.addEventListener('hardwareBackPress', () => {
   }
   _navigator.pop();
   return true;
-});var _navigator;
+});
 
 
 
