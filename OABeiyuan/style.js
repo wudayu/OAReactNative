@@ -21,7 +21,7 @@ module.exports = StyleSheet.create({
   },
   navBar: {
     flex: 1,
-    backgroundColor: '#141414',
+    backgroundColor: '#7FB14D',
   },
   toolbar: {
     backgroundColor: '#3CABDA',

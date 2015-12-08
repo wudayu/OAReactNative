@@ -27,9 +27,8 @@ var UserInfoView = React.createClass({
             style={styles.welcomeIcon}
             source={require('image!icon_avatar_login_ac')}
           />
-          <Text style={styles.welcomeText}
-            onPress={() => this.props.navigator.pop()}>
-            用户信息
+          <Text style={styles.welcomeText}>
+            个人信息
           </Text>
         </View>
       </View>

@@ -11,11 +11,6 @@ module.exports = StyleSheet.create({
     flex: 1,
     backgroundColor: '#F0F0F0',
   },
-  colSeparator: {
-    borderTopColor: '#D2D2D2',
-    borderTopWidth: 1,
-    marginLeft: 50,
-  },
   welcomePanel: {
     backgroundColor: '#7FB14D',
     flexDirection: 'column',

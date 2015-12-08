@@ -1,6 +1,7 @@
 'use strict';
 
 var React = require('react-native');
+var NavigationBar = require('react-native-navbar');
 
 var {
   // 使用Navigator在应用的不同界面中穿越
@@ -86,8 +87,9 @@ var OABeiyuan = React.createClass({
     return {};
   },
 
-
-
+  /*
+   * 渲染Android的界面，主要控制渲染NavToolbar+指定界面（View）
+   */
   renderSceneAndroid: function(route, navigator) {
     _navigator = navigator;
 
@@ -109,25 +111,44 @@ var OABeiyuan = React.createClass({
     }
   },
 
+  /*
+   * 渲染iOS的界面，主要控制渲染NavigationBar+指定界面（View）
+   */
   renderSceneIOS: function(route, navigator) {
     var Component = route.component;
     var navBar = route.navigationBar;
 
     switch (route.id) {
       case 'empty':
-      //Com <View />;
       case 'Login':
         Component = LoginView;
         navBar = null;
         break;
       case 'UserInfo':
         Component = UserInfoView;
-        navBar = null;
+        navBar = <NavigationBar
+          style={styles.navBar}
+          statusBar={{
+            hidden: 'false',
+            style: 'light-content'
+          }}
+          leftButton={{
+            title: 'Back',
+            handler: () => navigator.pop(),
+            tintColor: 'white',
+          }}
+          title={{
+            title: '个人信息',
+            tintColor: 'white'
+          }}
+        />;
         break;
     }
 
     if (navBar === null) {
       navBar = <View style={styles.statusBar} />;
+    } else {
+      navBar = <View><View style={styles.statusBar} />{navBar}</View>
     }
 
     return (
