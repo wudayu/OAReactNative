@@ -4,87 +4,27 @@ var React = require('react-native');
 
 var {
   StyleSheet,
-  Platform,
 } = React;
 
 module.exports = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F0F0F0',
+    backgroundColor: 'black',
   },
-  colSeparator: {
-    borderTopColor: '#D2D2D2',
-    borderTopWidth: 1,
-    marginLeft: 50,
+  buttonText: {
+    fontSize: 17,
+    fontWeight: '500',
   },
-  welcomePanel: {
+  statusBar: {
+    height: 20,
     backgroundColor: '#7FB14D',
-    flexDirection: 'column',
-    alignItems: 'center',
-    paddingTop: (Platform.OS === 'ios') ? 20 : 0,
   },
-  welcomeText: {
-    fontSize: 20,
-    color: '#FFFFFF',
-    marginBottom: 20,
-  },
-  welcomeIcon: {
-    width: 108,
-    height: 108,
-    marginTop: 20,
-    marginBottom: 20,
-  },
-  inputPanel: {
-    backgroundColor: '#FFFFFF',
-    height: 88,
-    borderTopColor: '#D2D2D2',
-    borderTopWidth: 1,
-    borderBottomColor: '#D2D2D2',
-    borderBottomWidth: 1,
-    flexDirection: 'column',
-  },
-  inputRow: {
-    height: 44,
-    backgroundColor: 'transparent',
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-  },
-  inputImg: {
-    alignSelf: 'center',
-    width: 22,
-    height: 22,
-    marginLeft: 16,
-    marginRight: 16,
-  },
-  textInput: {
-    alignSelf: 'center',
-    width: 250,
-    height: 43,
-    borderWidth: 0,
-  },
-  remPwdPanel: {
-    marginTop: 25,
-    marginBottom: 25,
-    marginLeft: 15,
-    height: 25,
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  loginBtnPanel: {
-    marginLeft: 15,
-    marginRight: 15,
-  },
-  userOptionPanel: {
-    flexDirection: 'row',
-    borderWidth: 0,
-    position: 'absolute',
-    bottom: 25,
-    left:0,
-    right:0,
+  navBar: {
     flex: 1,
-    justifyContent: 'space-around',
+    backgroundColor: '#141414',
   },
-  appNegButton: {
-    width: 130,
+  toolbar: {
+    backgroundColor: '#3CABDA',
+    height: 56,
   },
 });
