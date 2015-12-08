@@ -70,45 +70,6 @@ BackAndroid.addEventListener('hardwareBackPress', () => {
   return true;
 });var _navigator;
 
-var NavToolbar = React.createClass({
-
-  componentWillMount: function() {
-    var navigator = this.props.navigator;
-  },
-
-  render: function () {
-    if (this.props.navIcon) {
-      return (
-        <ToolbarAndroid
-          style={styles.toolbar}
-          navIcon={{uri: 'ic_arrow_back_white_24dp', isStatic: true}}
-          onIconClicked={this.props.navigator.pop}
-          actions={this.props.actions}
-          onActionSelected={this.props.onActionSelected}
-          title={this.props.route.title}
-          titleColor='white' />
-      )
-    }
-    return (
-      <ToolbarAndroid
-        style={styles.toolbar}
-        onIconClicked={this.props.navigator.pop}
-        actions={this.props.actions}
-        onActionSelected={this.props.onActionSelected}
-        titleColor='white'
-        title='贝源OA' />
-    )
-  }
-})
-
-BackAndroid.addEventListener('hardwareBackPress', () => {
-  if (_navigator.getCurrentRoutes().length === 1  ) {
-    return false;
-  }
-  _navigator.pop();
-  return true;
-});
-
 
 
 
