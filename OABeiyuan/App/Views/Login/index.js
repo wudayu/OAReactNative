@@ -44,9 +44,6 @@ var LoginView = React.createClass({
     return (
       <View style={styles.container}>
         <View style={styles.welcomePanel}>
-          <Text style={styles.welcomeText} >
-            欢迎使用贝源OA
-          </Text>
           <Image
             style={styles.welcomeIcon}
             source={require('image!icon_avatar_login_ac')}

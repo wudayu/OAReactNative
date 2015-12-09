@@ -10,6 +10,11 @@ module.exports = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#F0F0F0',
+    position: 'absolute',
+    top: 58,
+    left: 0,
+    right: 0,
+    bottom: 0,
   },
   welcomePanel: {
     backgroundColor: '#7FB14D',

@@ -10,6 +10,11 @@ module.exports = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#F0F0F0',
+    position: 'absolute',
+    top: 58,
+    left: 0,
+    right: 0,
+    bottom: 0,
   },
   colSeparator: {
     borderTopColor: '#D2D2D2',
@@ -21,15 +26,15 @@ module.exports = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
   },
-  welcomeText: {
-    fontSize: 20,
-    color: '#FFFFFF',
-    marginBottom: 20,
-  },
   welcomeIcon: {
     width: 108,
     height: 108,
     marginTop: 20,
+    marginBottom: 20,
+  },
+  welcomeText: {
+    fontSize: 20,
+    color: '#FFFFFF',
     marginBottom: 20,
   },
   inputPanel: {

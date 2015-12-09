@@ -23,8 +23,8 @@ var UserInfoView = require('./App/Views/UserInfo');
 // Styles
 var styles = require('./style');
 
-Platform.OS === 'ios' ? StatusBarIOS.setStyle('light-content', false): null;
 
+Platform.OS === 'ios' ? StatusBarIOS.setStyle('light-content', false): null;
 
 
 
@@ -122,18 +122,20 @@ var OABeiyuan = React.createClass({
       case 'empty':
       case 'Login':
         Component = LoginView;
-        navBar = null;
+        navBar = <NavigationBar
+          style={styles.navBar}
+          title={{
+            title: '欢迎使用贝源OA',
+            tintColor: 'white',
+          }}
+        />;
         break;
       case 'UserInfo':
         Component = UserInfoView;
         navBar = <NavigationBar
           style={styles.navBar}
-          statusBar={{
-            hidden: 'false',
-            style: 'light-content'
-          }}
           leftButton={{
-            title: 'Back',
+            title: '返回',
             handler: () => navigator.pop(),
             tintColor: 'white',
           }}
@@ -147,8 +149,6 @@ var OABeiyuan = React.createClass({
 
     if (navBar === null) {
       navBar = <View style={styles.statusBar} />;
-    } else {
-      navBar = <View><View style={styles.statusBar} />{navBar}</View>
     }
 
     return (
