@@ -24,7 +24,7 @@ module.exports = StyleSheet.create({
     backgroundColor: '#7FB14D',
   },
   toolBar: {
-    backgroundColor: '#7FB14D',
+    backgroundColor: '#70000D',
     height: 56,
   },
 });

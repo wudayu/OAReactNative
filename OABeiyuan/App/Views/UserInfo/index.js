@@ -22,14 +22,19 @@ var UserInfoView = React.createClass({
   render: function() {
     return (
       <View style={styles.container}>
-        <View style={styles.welcomePanel}>
+        <View style={styles.userBasicInfoPanel}>
           <Image
-            style={styles.welcomeIcon}
+            style={styles.userIcon}
             source={require('image!icon_avatar_login_ac')}
           />
-          <Text style={styles.welcomeText}>
-            个人信息
-          </Text>
+          <View style={styles.basicInfoPanel}>
+            <Text style={styles.userNameText}>
+              吴大宇
+            </Text>
+            <Text style={styles.userDeptText}>
+              部门：电商事业部
+            </Text>
+          </View>
         </View>
       </View>
     );

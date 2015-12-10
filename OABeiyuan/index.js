@@ -37,23 +37,23 @@ var ToolBar = React.createClass({
     if (this.props.navIcon) {
       return (
         <ToolbarAndroid
-          style={styles.toolBar}
           navIcon={{uri: 'ic_arrow_back_white', isStatic: true}}
+          title={this.props.route.title}
+          style={styles.toolBar}
           onIconClicked={this.props.navigator.pop}
           actions={this.props.actions}
           onActionSelected={this.props.onActionSelected}
-          title={this.props.route.title}
           titleColor='white' />
       )
     }
     return (
       <ToolbarAndroid
+        title='欢迎使用贝源OA'
         style={styles.toolBar}
         onIconClicked={this.props.navigator.pop}
         actions={this.props.actions}
         onActionSelected={this.props.onActionSelected}
-        titleColor='white'
-        title='贝源OA' />
+        titleColor='white' />
     )
   }
 });
@@ -196,8 +196,9 @@ var OABeiyuan = React.createClass({
     return (
       <Navigator
         debugOverlay={false}
-        // 初始化一个初始界面，用id来identify
-        initialRoute={{title: '登录', id: 'Login'}}
+        // 初始化一个初始界面，用id来identify, 这就是界面的入口
+        //initialRoute={{title: '登录', id: 'Login'}}
+        initialRoute={{title: '个人信息', id: 'UserInfo'}}
         // 新页面加载动画方式
         configureScene={configureScene}
         // 新页面绘制方式

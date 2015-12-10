@@ -16,20 +16,27 @@ module.exports = StyleSheet.create({
     right: 0,
     bottom: 0,
   },
-  welcomePanel: {
+  userBasicInfoPanel: {
+    height: 148,
     backgroundColor: '#7FB14D',
-    flexDirection: 'column',
+    flexDirection: 'row',
     alignItems: 'center',
   },
-  welcomeText: {
-    fontSize: 20,
-    color: '#FFFFFF',
-    marginBottom: 20,
-  },
-  welcomeIcon: {
+  userIcon: {
     width: 108,
     height: 108,
+    marginLeft: 20,
+  },
+  basicInfoPanel: {
+    marginLeft: 20,
+  },
+  userNameText: {
+    fontSize: 21,
+    color: '#FFFFFF',
+  },
+  userDeptText: {
+    fontSize: 16,
+    color: '#FFFFFF',
     marginTop: 20,
-    marginBottom: 20,
   },
 });
