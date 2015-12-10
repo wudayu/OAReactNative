@@ -11,7 +11,7 @@ module.exports = StyleSheet.create({
     flex: 1,
     backgroundColor: '#F0F0F0',
     position: 'absolute',
-    top: 58,
+    top: 56,
     left: 0,
     right: 0,
     bottom: 0,

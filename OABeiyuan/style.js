@@ -23,8 +23,8 @@ module.exports = StyleSheet.create({
     flex: 1,
     backgroundColor: '#7FB14D',
   },
-  toolbar: {
-    backgroundColor: '#3CABDA',
+  toolBar: {
+    backgroundColor: '#7FB14D',
     height: 56,
   },
 });

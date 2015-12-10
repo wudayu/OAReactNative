@@ -111,7 +111,7 @@ var LoginView = React.createClass({
     );
   },
   onPressLogin: function() {
-    this.props.navigator.push({title: 'UserInfo', id: 'UserInfo'})
+    this.props.navigator.push({title: '个人信息', id: 'UserInfo'})
   },
 });
 

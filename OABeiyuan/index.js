@@ -23,27 +23,22 @@ var UserInfoView = require('./App/Views/UserInfo');
 // Styles
 var styles = require('./style');
 
-
+/**
+ * 设置iOS的StatusBar风格
+ */
 Platform.OS === 'ios' ? StatusBarIOS.setStyle('light-content', false): null;
 
-
-
-
-
-var _navigator;
-
-var NavToolbar = React.createClass({
-
-  componentWillMount: function() {
-    var navigator = this.props.navigator;
-  },
-
+/**
+ * 使用ToolbarAndroid定义ToolBar
+ * 来作为本应用的Android导航栏
+ */
+var ToolBar = React.createClass({
   render: function () {
     if (this.props.navIcon) {
       return (
         <ToolbarAndroid
-          style={styles.toolbar}
-          navIcon={{uri: 'ic_arrow_back_white_24dp', isStatic: true}}
+          style={styles.toolBar}
+          navIcon={{uri: 'ic_arrow_back_white', isStatic: true}}
           onIconClicked={this.props.navigator.pop}
           actions={this.props.actions}
           onActionSelected={this.props.onActionSelected}
@@ -53,7 +48,7 @@ var NavToolbar = React.createClass({
     }
     return (
       <ToolbarAndroid
-        style={styles.toolbar}
+        style={styles.toolBar}
         onIconClicked={this.props.navigator.pop}
         actions={this.props.actions}
         onActionSelected={this.props.onActionSelected}
@@ -61,8 +56,12 @@ var NavToolbar = React.createClass({
         title='贝源OA' />
     )
   }
-})
+});
 
+/**
+ * 定义ToolbarAndroid的后退按键
+ */
+var _navigator;
 BackAndroid.addEventListener('hardwareBackPress', () => {
   if (_navigator.getCurrentRoutes().length === 1  ) {
     return false;
@@ -70,12 +69,6 @@ BackAndroid.addEventListener('hardwareBackPress', () => {
   _navigator.pop();
   return true;
 });
-
-
-
-
-
-
 
 
 /**
@@ -88,15 +81,16 @@ var OABeiyuan = React.createClass({
   },
 
   /*
-   * 渲染Android的界面，主要控制渲染NavToolbar+指定界面（View）
+   * 渲染Android的界面，主要控制渲染ToolBar+指定界面（View）
    */
   renderSceneAndroid: function(route, navigator) {
+    // 先将当前的navigator赋值给BackAndroid的_navigator方便操作
     _navigator = navigator;
 
     if (route.id === 'Login') {
       return (
         <View style={styles.container}>
-          <NavToolbar navigator={navigator} route={route} />
+          <ToolBar navigator={navigator} route={route} />
           <LoginView navigator={navigator} route={route} />
         </View>
       )
@@ -104,7 +98,7 @@ var OABeiyuan = React.createClass({
     if (route.id === 'UserInfo') {
       return (
         <View style={styles.container}>
-          <NavToolbar navIcon={true} navigator={navigator} route={route} />
+          <ToolBar navIcon={true} navigator={navigator} route={route} />
           <UserInfoView navigator={navigator} route={route} />
         </View>
       )
@@ -161,11 +155,6 @@ var OABeiyuan = React.createClass({
     );
   },
 
-
-
-
-
-
   /*
    * 设置Android切换界面动画为“渐变”模式
    */
@@ -208,7 +197,7 @@ var OABeiyuan = React.createClass({
       <Navigator
         debugOverlay={false}
         // 初始化一个初始界面，用id来identify
-        initialRoute={{title: 'Login', id: 'Login'}}
+        initialRoute={{title: '登录', id: 'Login'}}
         // 新页面加载动画方式
         configureScene={configureScene}
         // 新页面绘制方式
