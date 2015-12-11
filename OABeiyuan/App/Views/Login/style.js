@@ -77,6 +77,9 @@ module.exports = StyleSheet.create({
     marginLeft: 15,
     marginRight: 15,
   },
+  loginBtn: {
+    height: 35,
+  },
   userOptionPanel: {
     flexDirection: 'row',
     borderWidth: 0,
@@ -88,6 +91,7 @@ module.exports = StyleSheet.create({
     justifyContent: 'space-around',
   },
   appNegButton: {
+    height: 35,
     width: 130,
   },
 });

@@ -64,7 +64,7 @@ var LoginView = React.createClass({
               underlineColorAndroid='transparent'
               onChangeText={(text) => this._onTypingUserName({text})}
               value={this.state.userName}
-              />
+            />
           </View>
           <View style={styles.colSeparator} />
           <View style={styles.inputRow}>
@@ -75,11 +75,11 @@ var LoginView = React.createClass({
             <TextInput
               style={styles.textInput}
               placeholder='请输入密码'
-              //secureTextEntry="true"
+              secureTextEntry="true"
               underlineColorAndroid='transparent'
               onChangeText={(text) => this._onTypingUserPwd({text})}
               value={this.state.userPwd}
-              />
+            />
           </View>
         </View>
         <View style={styles.remPwdPanel}>
@@ -91,6 +91,7 @@ var LoginView = React.createClass({
         </View>
         <View style={styles.loginBtnPanel}>
           <AppButton
+            style={styles.loginBtn}
             text="登录"
             onPress={this.onPressLogin}
           />
