@@ -14,7 +14,8 @@ var {
 
 // Elements
 var AppButton = require('../Elements/AppButton'); // 系统主题按钮
-var AppNegButton = require('../Elements/AppNegButton');
+var AppNegButton = require('../Elements/AppNegButton'); // 系统主题镂空按钮
+var AppNoRadiusButton = require('../Elements/AppNoRadiusButton'); // 系统主题无圆角按钮
 var FormItem = require('./Elements/FormItem') // 本页面详情表单项
 // Styles
 var styles = require('./style');
@@ -62,6 +63,16 @@ var UserInfoView = React.createClass({
               部门：电商事业部
             </Text>
           </View>
+        </View>
+        <View style={styles.funcPanel}>
+          <AppNoRadiusButton
+            text='请假详情'
+            style={styles.funcLeftBtn}
+          />
+          <AppNoRadiusButton
+            text='加班详情'
+            style={styles.funcRightBtn}
+          />
         </View>
         <View style={styles.userDetailPanel}>
           <FormItem

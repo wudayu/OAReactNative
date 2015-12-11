@@ -60,5 +60,21 @@ module.exports = StyleSheet.create({
   editingBtn: {
     height: 35,
     width: 100,
-  }
+  },
+  funcPanel: {
+    borderBottomWidth: 1,
+    borderColor: '#D2D2D2',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+  },
+  funcLeftBtn: {
+    flex: 1,
+    height: 40,
+    borderRightWidth: 1,
+    borderColor: '#D2D2D2',
+  },
+  funcRightBtn: {
+    flex: 1,
+    height: 40,
+  },
 });
