@@ -7,16 +7,14 @@ var {
   // 使用Navigator在应用的不同界面中穿越
   Navigator,
   StatusBarIOS,
-  StyleSheet,
-  Text,
-  TouchableHighlight,
-  TouchableOpacity,
   View,
   Platform,
   ToolbarAndroid,
   BackAndroid,
 } = React;
 
+// Strings
+var Strings = require('./App/Values/string');
 // Views
 var LoginView = require('./App/Views/Login');
 var UserInfoView = require('./App/Views/UserInfo');
@@ -48,7 +46,7 @@ var ToolBar = React.createClass({
     }
     return (
       <ToolbarAndroid
-        title='欢迎使用贝源OA'
+        title={Strings.appWelcomeMsg}
         style={styles.toolBar}
         onIconClicked={this.props.navigator.pop}
         actions={this.props.actions}
@@ -119,7 +117,7 @@ var OABeiyuan = React.createClass({
         navBar = <NavigationBar
           style={styles.navBar}
           title={{
-            title: '欢迎使用贝源OA',
+            title: Strings.appWelcomeMsg,
             tintColor: 'white',
           }}
         />;
@@ -129,12 +127,12 @@ var OABeiyuan = React.createClass({
         navBar = <NavigationBar
           style={styles.navBar}
           leftButton={{
-            title: '返回',
+            title: Strings.back,
             handler: () => navigator.pop(),
             tintColor: 'white',
           }}
           title={{
-            title: '个人信息',
+            title: Strings.titleUserInfo,
             tintColor: 'white'
           }}
         />;
@@ -197,8 +195,8 @@ var OABeiyuan = React.createClass({
       <Navigator
         debugOverlay={false}
         // 初始化一个初始界面，用id来identify, 这就是界面的入口
-        initialRoute={{title: '登录', id: 'Login'}}
-        //initialRoute={{title: '个人信息', id: 'UserInfo'}}
+        initialRoute={{title: Strings.titleLogin, id: 'Login'}}
+        //initialRoute={{title: Strings.titleUserInfo, id: 'UserInfo'}}
         // 新页面加载动画方式
         configureScene={configureScene}
         // 新页面绘制方式

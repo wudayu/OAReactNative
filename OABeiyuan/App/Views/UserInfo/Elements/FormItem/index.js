@@ -21,7 +21,6 @@ var {
 var styles = require('./style');
 
 var AppButton = React.createClass({
-
   render: function() {
     return (
       <View style={this.props.style}>
@@ -31,7 +30,7 @@ var AppButton = React.createClass({
           </Text>
           <TextInput
             style={this.props.editable ? styles.inputEditing : styles.input}
-            placeholder='请输入密码'
+            placeholder={this.props.placeholder}
             underlineColorAndroid='transparent'
             value={this.props.value}
             editable={this.props.editable}

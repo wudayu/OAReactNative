@@ -3,18 +3,14 @@
 var React = require('react-native');
 
 var {
-  AppRegistry,
-  StyleSheet,
   Text,
   View,
   Image,
   TextInput,
-  TouchableHighlight,
-  ToastAndroid,
-  Platform,
-  AlertIOS,
 } = React;
 
+// Strings
+var Strings = require('../../Values/string');
 // Elements
 var AppButton = require('../Elements/AppButton'); // 系统主题按钮
 var AppNegButton = require('../Elements/AppNegButton'); // 系统主题镂空按钮
@@ -60,7 +56,7 @@ var LoginView = React.createClass({
             />
             <TextInput
               style={styles.textInput}
-              placeholder='请输入账号'
+              placeholder={Strings.textInputUser}
               underlineColorAndroid='transparent'
               onChangeText={(text) => this._onTypingUserName({text})}
               value={this.state.userName}
@@ -74,7 +70,7 @@ var LoginView = React.createClass({
             />
             <TextInput
               style={styles.textInput}
-              placeholder='请输入密码'
+              placeholder={Strings.textInputPwd}
               secureTextEntry="true"
               underlineColorAndroid='transparent'
               onChangeText={(text) => this._onTypingUserPwd({text})}
@@ -84,7 +80,7 @@ var LoginView = React.createClass({
         </View>
         <View style={styles.remPwdPanel}>
           <AppCheckBox
-            text='记住密码'
+            text={Strings.chkRemPwdText}
             checked={this.state.remPwd}
             onPress={(checked) => this.setState({remPwd : checked})}
           />
@@ -92,19 +88,17 @@ var LoginView = React.createClass({
         <View style={styles.loginBtnPanel}>
           <AppButton
             style={styles.loginBtn}
-            text="登录"
+            text={Strings.btnLoginText}
             onPress={this.onPressLogin}
           />
         </View>
         <View style={styles.userOptionPanel}>
           <AppNegButton
-            text="忘记密码？"
-            onPress={this.onPressLogin}
+            text={Strings.btnForgetText}
             style={styles.appNegButton}
           />
           <AppNegButton
-            text="联系管理员"
-            onPress={this.onPressLogin}
+            text={Strings.btnContactText}
             style={styles.appNegButton}
           />
         </View>
@@ -112,7 +106,7 @@ var LoginView = React.createClass({
     );
   },
   onPressLogin: function() {
-    this.props.navigator.push({title: '个人信息', id: 'UserInfo'})
+    this.props.navigator.push({title: Strings.titleUserInfo, id: 'UserInfo'})
   },
 });
 

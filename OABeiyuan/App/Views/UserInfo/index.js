@@ -3,15 +3,13 @@
 var React = require('react-native');
 
 var {
-  AppRegistry,
-  StyleSheet,
   Text,
   View,
   Image,
-  TextInput,
-  Platform,
 } = React;
 
+// Strings
+var Strings = require('../../Values/string');
 // Elements
 var AppButton = require('../Elements/AppButton'); // 系统主题按钮
 var AppNegButton = require('../Elements/AppNegButton'); // 系统主题镂空按钮
@@ -31,11 +29,11 @@ var UserInfoView = React.createClass({
     if (this.state.editing) {
       buttons = <View style={styles.editingBtnPanel}>
         <AppNegButton
-          text="提交更改"
+          text={Strings.btnCommitChangeText}
           style={styles.editingBtn}
           />
         <AppNegButton
-          text="取消更改"
+          text={Strings.btnCancelChangeText}
           onPress={() => this.setState({editing : false})}
           style={styles.editingBtn}
           />
@@ -43,7 +41,7 @@ var UserInfoView = React.createClass({
     } else {
       buttons = <AppButton
         style={styles.editBtn}
-        text='编辑'
+        text={Strings.btnEditText}
         onPress={() => this.setState({editing : true})}
       />
     }
@@ -66,11 +64,11 @@ var UserInfoView = React.createClass({
         </View>
         <View style={styles.funcPanel}>
           <AppNoRadiusButton
-            text='请假详情'
+            text={Strings.btnLeaveText}
             style={styles.funcLeftBtn}
           />
           <AppNoRadiusButton
-            text='加班详情'
+            text={Strings.btnWorklateText}
             style={styles.funcRightBtn}
           />
         </View>
@@ -78,21 +76,21 @@ var UserInfoView = React.createClass({
           <FormItem
             style={styles.formItem}
             id='mobile'
-            title='手机'
+            title={Strings.promptMobile}
             value='18651817673'
             editable={this.state.editing}
           />
           <FormItem
             style={styles.formItem}
             id='email'
-            title='电子邮件'
+            title={Strings.promptEmail}
             value='wudayu@gmail.com'
             editable={this.state.editing}
           />
           <FormItem
             style={styles.formItem}
             id='address'
-            title='居住地址'
+            title={Strings.promptAddress}
             value='江苏省南京市玄武区东南大学'
             editable={this.state.editing}
           />
