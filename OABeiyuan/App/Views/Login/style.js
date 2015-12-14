@@ -6,6 +6,8 @@ var {
   StyleSheet,
 } = React;
 
+var Colors = require('../../Styles/colors');
+
 module.exports = StyleSheet.create({
   container: {
     flex: 1,
@@ -22,7 +24,7 @@ module.exports = StyleSheet.create({
     marginLeft: 50,
   },
   welcomePanel: {
-    backgroundColor: '#7FB14D',
+    backgroundColor: Colors.appColor,
     flexDirection: 'column',
     alignItems: 'center',
   },

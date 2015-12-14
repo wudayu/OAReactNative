@@ -6,6 +6,8 @@ var {
   StyleSheet,
 } = React;
 
+var Colors = require('../../../Styles/colors');
+
 module.exports = StyleSheet.create({
   btnHighLight: {
     flexDirection: 'row',
@@ -16,7 +18,7 @@ module.exports = StyleSheet.create({
     height: 17,
   },
   cbText: {
-    color: '#7FB14D',
+    color: Colors.appColor,
     fontSize: 16,
     marginLeft: 8,
   },

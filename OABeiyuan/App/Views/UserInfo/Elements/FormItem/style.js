@@ -6,6 +6,8 @@ var {
   StyleSheet,
 } = React;
 
+var Colors = require('../../../../Styles/colors');
+
 module.exports = StyleSheet.create({
   item: {
     backgroundColor: '#FFFFFF',

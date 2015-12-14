@@ -6,6 +6,8 @@ var {
   StyleSheet,
 } = React;
 
+var Colors = require('../../../Styles/colors');
+
 module.exports = StyleSheet.create({
   btnHighLight: {
     position: 'absolute',
@@ -20,7 +22,7 @@ module.exports = StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0,
-    backgroundColor: '7FB14D',
+    backgroundColor: Colors.appColor,
     alignItems: 'center',
     justifyContent: 'center',
   },
