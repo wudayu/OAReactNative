@@ -6,25 +6,24 @@ var {
   StyleSheet,
 } = React;
 
+var Colors = require('./App/Values/colors');
+var Dimens = require('./App/Values/dimens');
+
 module.exports = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'black',
-  },
-  buttonText: {
-    fontSize: 17,
-    fontWeight: '500',
+    backgroundColor: Colors.black,
   },
   statusBar: {
-    height: 20,
-    backgroundColor: '#7FB14D',
+    height: Dimens.statusBarHeight,
+    backgroundColor: Colors.appColor,
   },
   navBar: {
     flex: 1,
-    backgroundColor: '#7FB14D',
+    backgroundColor: Colors.appColor,
   },
   toolBar: {
-    backgroundColor: '#70000D',
-    height: 56,
+    backgroundColor: Colors.appColor,
+    height: Dimens.topBarMargin,
   },
 });

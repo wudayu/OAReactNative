@@ -6,13 +6,14 @@ var {
   StyleSheet,
 } = React;
 
-var Colors = require('../../../../Styles/colors');
+var Colors = require('../../../../Values/colors');
+var Dimens = require('../../../../Values/dimens');
 
 module.exports = StyleSheet.create({
   item: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: Colors.white,
     borderBottomWidth: 1,
-    borderColor: '#D2D2D2',
+    borderColor: Colors.borderColor,
     position: 'absolute',
     top: 0,
     bottom: 0,
@@ -22,8 +23,8 @@ module.exports = StyleSheet.create({
     alignItems: 'center',
   },
   title: {
-    color: '#444444',
-    fontSize: 14,
+    color: Colors.promptTextColor,
+    fontSize: Dimens.promptTextSize,
     marginLeft: 10,
   },
   input: {

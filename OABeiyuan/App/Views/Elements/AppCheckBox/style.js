@@ -6,7 +6,7 @@ var {
   StyleSheet,
 } = React;
 
-var Colors = require('../../../Styles/colors');
+var Colors = require('../../../Values/colors');
 
 module.exports = StyleSheet.create({
   btnHighLight: {

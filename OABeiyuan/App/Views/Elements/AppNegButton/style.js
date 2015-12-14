@@ -6,7 +6,8 @@ var {
   StyleSheet,
 } = React;
 
-var Colors = require('../../../Styles/colors');
+var Colors = require('../../../Values/colors');
+var Dimens = require('../../../Values/dimens');
 
 module.exports = StyleSheet.create({
   btnHighLight: {
@@ -30,6 +31,6 @@ module.exports = StyleSheet.create({
   },
   btnText: {
     color: Colors.appColor,
-    fontSize: 18,
+    fontSize: Dimens.buttonTextSize,
   },
 });

@@ -6,7 +6,8 @@ var {
   StyleSheet,
 } = React;
 
-var Colors = require('../../../Styles/colors');
+var Colors = require('../../../Values/colors');
+var Dimens = require('../../../Values/dimens');
 
 module.exports = StyleSheet.create({
   btnHighLight: {
@@ -27,7 +28,7 @@ module.exports = StyleSheet.create({
     justifyContent: 'center',
   },
   btnText: {
-    color: '#FFFFFF',
-    fontSize: 18,
+    color: Colors.white,
+    fontSize: Dimens.buttonTextSize,
   },
 });

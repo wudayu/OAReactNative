@@ -6,20 +6,21 @@ var {
   StyleSheet,
 } = React;
 
-var Colors = require('../../Styles/colors');
+var Colors = require('../../Values/colors');
+var Dimens = require('../../Values/dimens');
 
 module.exports = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F0F0F0',
+    backgroundColor: Colors.appBackgroundColor,
     position: 'absolute',
-    top: 56,
+    top: Dimens.topBarMargin,
     left: 0,
     right: 0,
     bottom: 0,
   },
   colSeparator: {
-    borderTopColor: '#D2D2D2',
+    borderTopColor: Colors.borderColor,
     borderTopWidth: 1,
     marginLeft: 50,
   },
@@ -29,22 +30,22 @@ module.exports = StyleSheet.create({
     alignItems: 'center',
   },
   welcomeIcon: {
-    width: 108,
-    height: 108,
+    width: Dimens.avatarSize,
+    height: Dimens.avatarSize,
     marginTop: 20,
     marginBottom: 20,
   },
   welcomeText: {
     fontSize: 20,
-    color: '#FFFFFF',
+    color: Colors.white,
     marginBottom: 20,
   },
   inputPanel: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: Colors.white,
     height: 88,
-    borderTopColor: '#D2D2D2',
+    borderTopColor: Colors.borderColor,
     borderTopWidth: 1,
-    borderBottomColor: '#D2D2D2',
+    borderBottomColor: Colors.borderColor,
     borderBottomWidth: 1,
     flexDirection: 'column',
   },
@@ -93,7 +94,7 @@ module.exports = StyleSheet.create({
     justifyContent: 'space-around',
   },
   appNegButton: {
-    height: 35,
+    height: Dimens.standardAppNegButtonHeight,
     width: 130,
   },
 });
