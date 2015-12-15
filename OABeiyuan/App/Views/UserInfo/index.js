@@ -66,6 +66,7 @@ var UserInfoView = React.createClass({
           <AppNoRadiusButton
             text={Strings.btnLeaveText}
             style={styles.funcLeftBtn}
+            onPress={() => this.props.navigator.push({title: Strings.titleWorklateList, id: 'WorklateList'})}
           />
           <AppNoRadiusButton
             text={Strings.btnWorklateText}

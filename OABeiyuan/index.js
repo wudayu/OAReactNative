@@ -18,6 +18,7 @@ var Strings = require('./App/Values/string');
 // Views
 var LoginView = require('./App/Views/Login');
 var UserInfoView = require('./App/Views/UserInfo');
+var WorklateListView = require('./App/Views/WorklateList');
 // Styles
 var styles = require('./style');
 
@@ -101,6 +102,14 @@ var OABeiyuan = React.createClass({
         </View>
       )
     }
+    if (route.id === 'WorklateList') {
+      return (
+        <View style={styles.container}>
+          <ToolBar navIcon={true} navigator={navigator} route={route} />
+          <WorklateListView navigator={navigator} route={route} />
+        </View>
+      )
+    }
   },
 
   /*
@@ -137,6 +146,21 @@ var OABeiyuan = React.createClass({
           }}
         />;
         break;
+      case 'WorklateList':
+        Component = WorklateListView;
+        navBar = <NavigationBar
+          style={styles.navBar}
+          leftButton={{
+            title: Strings.back,
+            handler: () => navigator.pop(),
+            tintColor: 'white',
+          }}
+          title={{
+            title: Strings.titleWorklateList,
+            tintColor: 'white'
+          }}
+        />;
+        break;
     }
 
     if (navBar === null) {
@@ -169,6 +193,8 @@ var OABeiyuan = React.createClass({
         return Navigator.SceneConfigs.FloatFromBottom;
       case 'UserInfo':
         return Navigator.SceneConfigs.HorizontalSwipeJump;
+      case 'WorklateList':
+        return Navigator.SceneConfigs.VerticalUpSwipeJump;
       default:
         return Navigator.SceneConfigs.FloatFromBottom;
     }

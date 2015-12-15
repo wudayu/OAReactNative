@@ -20,6 +20,7 @@ var Strings = {
   promptMobile: '手机',
   promptEmail: '电子邮件',
   promptAddress: '居住地址',
+  titleWorklateList: '加班记录',
 };
 
 module.exports = Strings;
