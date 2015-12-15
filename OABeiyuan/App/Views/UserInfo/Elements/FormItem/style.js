@@ -35,7 +35,7 @@ module.exports = StyleSheet.create({
     bottom: 10,
   },
   inputEditing: {
-    color: '#FF00FF',
+    color: Colors.appColor,
     position: 'absolute',
     left: 80,
     right: 10,

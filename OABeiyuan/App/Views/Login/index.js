@@ -19,6 +19,9 @@ var AppCheckBox = require('../Elements/AppCheckBox');
 var styles = require('./style');
 
 var LoginView = React.createClass({
+  onPressLogin: function() {
+    this.props.navigator.push({title: Strings.titleUserInfo, id: 'UserInfo'})
+  },
   _onTypingUserName: function(text: Object) {
     this.setState({
       userName: text.text,
@@ -71,7 +74,8 @@ var LoginView = React.createClass({
             <TextInput
               style={styles.textInput}
               placeholder={Strings.textInputPwd}
-              secureTextEntry="true"
+              // FIXME Android 在使用此属性时,会出bug,暂时注释掉
+              // secureTextEntry='true'
               underlineColorAndroid='transparent'
               onChangeText={(text) => this._onTypingUserPwd({text})}
               value={this.state.userPwd}
@@ -104,10 +108,7 @@ var LoginView = React.createClass({
         </View>
       </View>
     );
-  },
-  onPressLogin: function() {
-    this.props.navigator.push({title: Strings.titleUserInfo, id: 'UserInfo'})
-  },
+  }
 });
 
 module.exports = LoginView;
