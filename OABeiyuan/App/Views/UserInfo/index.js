@@ -76,21 +76,21 @@ var UserInfoView = React.createClass({
         <View style={styles.userDetailPanel}>
           <FormItem
             style={styles.formItem}
-            id='mobile'
+            key='mobile'
             title={Strings.promptMobile}
             value='18651817673'
             editable={this.state.editing}
           />
           <FormItem
             style={styles.formItem}
-            id='email'
+            key='email'
             title={Strings.promptEmail}
             value='wudayu@gmail.com'
             editable={this.state.editing}
           />
           <FormItem
             style={styles.formItem}
-            id='address'
+            key='address'
             title={Strings.promptAddress}
             value='江苏省南京市玄武区东南大学'
             editable={this.state.editing}

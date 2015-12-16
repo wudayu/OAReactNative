@@ -5,7 +5,6 @@ var React = require('react-native');
 var {
   Text,
   View,
-  Image,
   ListView,
 } = React;
 
@@ -15,6 +14,7 @@ var Strings = require('../../Values/string');
 var AppButton = require('../Elements/AppButton'); // 系统主题按钮
 var AppNegButton = require('../Elements/AppNegButton'); // 系统主题镂空按钮
 var AppNoRadiusButton = require('../Elements/AppNoRadiusButton'); // 系统主题无圆角按钮
+var ListItem = require('./Elements/ListItem'); // 本页面列表项
 // Styles
 var styles = require('./style');
 
@@ -29,7 +29,6 @@ var WorklateView = React.createClass({
       loaded: false,
     };
   },
-
   render: function() {
     var content = null;
 
@@ -38,14 +37,12 @@ var WorklateView = React.createClass({
     } else {
       content = this.renderLoadedListView();
     }
-
     return (
       <View style={styles.container}>
         {content}
       </View>
     );
   },
-
   renderLoadingView: function() {
     return (
       <Text style={styles.promptLoading}>
@@ -53,32 +50,25 @@ var WorklateView = React.createClass({
       </Text>
     );
   },
-
   renderLoadedListView: function() {
     return (
       <ListView
         dataSource={this.state.dataSource}
-        renderRow={this.renderMovie}
+        renderRow={this.renderWorklate}
       />
     );
   },
-
-  renderMovie: function(movie) {
+  renderWorklate: function(worklate) {
     return (
-      <View style={styles.itemContainer}>
-        <Image source={{uri: movie.posters.thumbnail}} style={styles.thumbnail} />
-        <View style={styles.rightContainer}>
-          <Text style={styles.title}>{movie.title}</Text>
-          <Text style={styles.year}>{movie.year}</Text>
-        </View>
-      </View>
+      <ListItem
+        style={styles.listItem}
+        // TODO add properties
+      />
     );
   },
-
   componentDidMount: function() {
     this.fetchData();
   },
-
   fetchData: function() {
     fetch(REQUEST_URL)
       .then((response) => response.json())

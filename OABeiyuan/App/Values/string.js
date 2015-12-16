@@ -22,6 +22,9 @@ var Strings = {
   promptAddress: '居住地址',
   titleWorklateList: '加班记录',
   promptLoadingWorklate: '正在载入加班历史列表...',
+  textWorklateType: '类型',
+  textWorklateApplier: '申请人',
+  textWorklateReason: '事由',
 };
 
 module.exports = Strings;
