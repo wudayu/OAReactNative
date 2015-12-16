@@ -37,11 +37,11 @@ module.exports = StyleSheet.create({
   },
   userNameText: {
     fontSize: 21,
-    color: Colors.white,
+    color: Colors.textAntiAppColor,
   },
   userDeptText: {
     fontSize: 16,
-    color: Colors.white,
+    color: Colors.textAntiAppColor,
     marginTop: 20,
   },
   userDetailPanel: {

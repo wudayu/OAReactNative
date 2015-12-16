@@ -12,7 +12,7 @@ var Dimens = require('./App/Values/dimens');
 module.exports = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.black,
+    backgroundColor: 'white',
   },
   statusBar: {
     height: Dimens.statusBarHeight,

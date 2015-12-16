@@ -21,6 +21,7 @@ var Strings = {
   promptEmail: '电子邮件',
   promptAddress: '居住地址',
   titleWorklateList: '加班记录',
+  promptLoadingWorklate: '正在载入加班历史列表...',
 };
 
 module.exports = Strings;

@@ -28,7 +28,7 @@ module.exports = StyleSheet.create({
     justifyContent: 'center',
   },
   btnText: {
-    color: Colors.white,
+    color: Colors.textAntiAppColor,
     fontSize: Dimens.buttonTextSize,
   },
 });

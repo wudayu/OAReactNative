@@ -11,73 +11,38 @@ var Dimens = require('../../Values/dimens');
 
 module.exports = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: Colors.appBackgroundColor,
+    backgroundColor: '#F5FCFF',
     position: 'absolute',
     top: Dimens.topBarMargin,
     left: 0,
     right: 0,
     bottom: 0,
-  },
-  userBasicInfoPanel: {
-    height: 148,
-    backgroundColor: Colors.appColor,
+    justifyContent: 'center',
     flexDirection: 'row',
+  },
+  promptLoading: {
+    alignSelf: 'center',
+  },
+  itemContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
     alignItems: 'center',
-    borderColor: Colors.borderColor,
-    borderBottomWidth: 1,
+    backgroundColor: '#F5FCFF',
   },
-  userIcon: {
-    width: Dimens.avatarSize,
-    height: Dimens.avatarSize,
-    marginLeft: 20,
-  },
-  basicInfoPanel: {
-    marginLeft: 20,
-  },
-  userNameText: {
-    fontSize: 21,
-    color: Colors.white,
-  },
-  userDeptText: {
-    fontSize: 16,
-    color: Colors.white,
-    marginTop: 20,
-  },
-  userDetailPanel: {
-  },
-  formItem: {
-    height: 55,
-  },
-  editBtn: {
-    height: Dimens.standardAppButtonHeight,
-    marginLeft: 15,
-    marginRight: 15,
-    marginTop: 15,
-  },
-  editingBtnPanel: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    marginTop: 15,
-  },
-  editingBtn: {
-    height: Dimens.standardAppNegButtonHeight,
-    width: 100,
-  },
-  funcPanel: {
-    borderBottomWidth: 1,
-    borderColor: Colors.borderColor,
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-  },
-  funcLeftBtn: {
+  rightContainer: {
     flex: 1,
-    height: Dimens.standardAppNegButtonHeight,
-    borderRightWidth: 1,
-    borderColor: Colors.borderColor,
   },
-  funcRightBtn: {
-    flex: 1,
-    height: Dimens.standardAppNegButtonHeight,
+  title: {
+    fontSize: 20,
+    marginBottom: 8,
+    textAlign: 'center',
+  },
+  year: {
+    textAlign: 'center',
+  },
+  thumbnail: {
+    width: 53,
+    height: 81,
   },
 });
