@@ -11,6 +11,8 @@ var {
 
 // Strings
 var Strings = require('../../Values/string');
+// Utils
+var netHandler = require('../../Utils/net');
 // Elements
 var AppButton = require('../Elements/AppButton'); // 系统主题按钮
 var AppNegButton = require('../Elements/AppNegButton'); // 系统主题镂空按钮
@@ -18,9 +20,15 @@ var AppCheckBox = require('../Elements/AppCheckBox');
 // Styles
 var styles = require('./style');
 
+
 var LoginView = React.createClass({
   onPressLogin: function() {
-    this.props.navigator.push({title: Strings.titleUserInfo, id: 'UserInfo'})
+    var granted = netHandler.loginWithNameAndPwd(this.state.userName, this.state.userPwd, this.props.navigator);
+    if (granted) {
+      this.props.navigator.push({title: Strings.titleUserInfo, id: 'UserInfo'});
+    } else {
+      //this.props.navigator.push({title: Strings.titleUserInfo, id: 'UserInfo'});
+    }
   },
   _onTypingUserName: function(text: Object) {
     this.setState({
