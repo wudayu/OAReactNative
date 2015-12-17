@@ -23,6 +23,6 @@ module.exports = StyleSheet.create({
     alignSelf: 'center',
   },
   listItem: {
-    height: Dimens.worklateItemHeight,
+    height: 100,
   },
 });

@@ -9,7 +9,6 @@ var Dimens = {
   buttonTextSize: 18,
   promptTextSize: 14,
   avatarSize: 108,
-  worklateItemHeight: 60,
 };
 
 module.exports = Dimens;

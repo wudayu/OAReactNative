@@ -62,10 +62,11 @@ var WorklateView = React.createClass({
     return (
       <ListItem
         style={styles.listItem}
+        worklateId="TODO id"
         type="事假"
         applier="吴大宇"
         reason="家里有事需要回家"
-        beginTime="2015-08-11"
+        beginTime="08-11"
         lastHours="3"
         auditStatus="审核通过"
       />

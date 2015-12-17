@@ -155,6 +155,11 @@ var OABeiyuan = React.createClass({
             handler: () => navigator.pop(),
             tintColor: 'white',
           }}
+          rightButton={{
+            title: Strings.add,
+            handler: () => navigator.push({title:Strings.titleWorklateDetail, id:'WorklateDetail'}),
+            tintColor: 'white',
+          }}
           title={{
             title: Strings.titleWorklateList,
             tintColor: 'white'

@@ -11,6 +11,8 @@ var {
   Text,
   View,
   Image,
+  AlertIOS,
+  TouchableHighlight,
 } = React;
 
 // Strings
@@ -19,33 +21,46 @@ var Strings = require('../../../../Values/string');
 var styles = require('./style');
 
 var ListItem = React.createClass({
+  _onPress: function() {
+    // TODO jump to edit ui
+    AlertIOS.alert(
+      'Welcome',
+      this.props.worklateId,
+      [
+        {text: 'OK', onPress: () => console.log('OK Pressed!')},
+        {text: 'Cancel', onPress: () => console.log('Cancel Pressed!'), style: 'cancel'},
+      ]
+    )
+  },
   render: function() {
     return (
       <View style={this.props.style}>
-        <View style={styles.item}>
-          <View style={styles.rowBlock}>
-            <Text style={styles.sigContent}>
-              {Strings.textWorklateType} : {this.props.type}
-            </Text>
-            <Text style={styles.sigContent}>
-              {Strings.textWorklateApplier} : {this.props.applier}
-            </Text>
-            <Text style={styles.sigContent}>
-              {Strings.textWorklateReason} : {this.props.reason}
-            </Text>
+        <TouchableHighlight style={styles.itemHighLight} onPress={() => this._onPress()}>
+          <View style={styles.item}>
+            <View style={styles.rowBlock}>
+              <Text style={styles.sigContent}>
+                {Strings.textWorklateType} : {this.props.type}
+              </Text>
+              <Text style={styles.sigContent}>
+                {Strings.textWorklateApplier} : {this.props.applier}
+              </Text>
+              <Text style={styles.sigContent}>
+                {Strings.textWorklateReason} : {this.props.reason}
+              </Text>
+            </View>
+            <View style={styles.rowBlock}>
+              <Text style={styles.sigContent}>
+                {Strings.textWorklateBeginTm} : {this.props.beginTime}
+              </Text>
+              <Text style={styles.sigContent}>
+                {Strings.textWorklateHours} : {this.props.lastHours}
+              </Text>
+              <Text style={styles.sigContent}>
+                {Strings.textWorklateAuditStatus} : {this.props.auditStatus}
+              </Text>
+            </View>
           </View>
-          <View style={styles.rowBlock}>
-            <Text style={styles.sigContent}>
-              {Strings.textWorklateBeginTm} : {this.props.beginTime}
-            </Text>
-            <Text style={styles.sigContent}>
-              {Strings.textWorklateHours} : {this.props.lastHours}
-            </Text>
-            <Text style={styles.sigContent}>
-              {Strings.textWorklateAuditStatus} : {this.props.auditStatus}
-            </Text>
-          </View>
-        </View>
+        </TouchableHighlight>
       </View>
     );
   }
