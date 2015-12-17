@@ -23,15 +23,26 @@ var ListItem = React.createClass({
     return (
       <View style={this.props.style}>
         <View style={styles.item}>
-          <View style={styles.firstBlock}>
-            <Text>
+          <View style={styles.rowBlock}>
+            <Text style={styles.sigContent}>
               {Strings.textWorklateType} : {this.props.type}
             </Text>
-            <Text>
+            <Text style={styles.sigContent}>
               {Strings.textWorklateApplier} : {this.props.applier}
             </Text>
-            <Text>
+            <Text style={styles.sigContent}>
               {Strings.textWorklateReason} : {this.props.reason}
+            </Text>
+          </View>
+          <View style={styles.rowBlock}>
+            <Text style={styles.sigContent}>
+              {Strings.textWorklateBeginTm} : {this.props.beginTime}
+            </Text>
+            <Text style={styles.sigContent}>
+              {Strings.textWorklateHours} : {this.props.lastHours}
+            </Text>
+            <Text style={styles.sigContent}>
+              {Strings.textWorklateAuditStatus} : {this.props.auditStatus}
             </Text>
           </View>
         </View>
@@ -53,7 +64,7 @@ module.exports = ListItem;
  //加班类型
  private Integer overtimeType;
  //加班事由
- private String voertimeReason;
+ private String overtimeReason;
  //申请人
  private Integer applierId;
  //申请时间

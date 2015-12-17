@@ -21,10 +21,12 @@ module.exports = StyleSheet.create({
     right: 0,
     flexDirection: 'column',
   },
-  firstBlock: {
-    borderWidth: 1,
+  rowBlock: {
     height: Dimens.worklateItemHeight / 2,
     flexDirection: 'row',
     alignItems: 'center',
+  },
+  sigContent: {
+    marginRight: 10,
   },
 });

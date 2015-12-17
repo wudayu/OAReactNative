@@ -25,6 +25,9 @@ var Strings = {
   textWorklateType: '类型',
   textWorklateApplier: '申请人',
   textWorklateReason: '事由',
+  textWorklateBeginTm: '开始时间',
+  textWorklateHours: '持续时间',
+  textWorklateAuditStatus: '审核状态',
 };
 
 module.exports = Strings;
