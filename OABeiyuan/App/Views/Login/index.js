@@ -1,6 +1,7 @@
 'use strict';
 
 var React = require('react-native');
+var store = require('react-native-simple-store');
 
 var {
   Text,
@@ -28,6 +29,16 @@ var LoginView = React.createClass({
       .then((response) => response.json())
       .then((responseJson) => netHandler.handleResponse(responseJson))
       .then((responseData) => {
+        if (responseData === null) {
+          return null;
+        }
+        //utilHandler.show(responseData.userId + ', ' + responseData.token);
+        store.save('userBasic', {
+          userId : responseData.userId,
+          token : responseData.token,
+        });
+
+        // TODO 先获取用户信息, 再跳转页面
         this.props.navigator.push({title: Strings.titleUserInfo, id: 'UserInfo'});
       });
   },

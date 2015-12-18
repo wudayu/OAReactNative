@@ -27,9 +27,10 @@ exports.handleResponse = function(responseJson: Object, navigator: Object) {
     // 服务端无法处理
     return null;
   }
-  if (responseJson.messageType !== '1') {
-    utilHandler.show(responseJson.msg);
-  }
+  // TODO remove comments
+  //if (responseJson.messageType !== '1') {
+  //  utilHandler.show(responseJson.msg);
+  //}
 
   return responseJson.data;
 }
