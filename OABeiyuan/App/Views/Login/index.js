@@ -32,7 +32,7 @@ var LoginView = React.createClass({
         if (responseData === null) {
           return null;
         }
-        //utilHandler.show(responseData.userId + ', ' + responseData.token);
+        // 存储全局用户信息
         store.save('userBasic', {
           userId : responseData.userId,
           token : responseData.token,
