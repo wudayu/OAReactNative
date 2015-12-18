@@ -24,7 +24,7 @@ module.exports = StyleSheet.create({
     backgroundColor: Colors.appColor,
     flexDirection: 'row',
     alignItems: 'center',
-    borderColor: Colors.borderColor,
+    borderColor: Colors.textAntiAppColor,
     borderBottomWidth: 1,
   },
   userIcon: {
@@ -74,7 +74,7 @@ module.exports = StyleSheet.create({
     flex: 1,
     height: Dimens.standardAppNegButtonHeight,
     borderRightWidth: 1,
-    borderColor: Colors.borderColor,
+    borderColor: Colors.textAntiAppColor,
   },
   funcRightBtn: {
     flex: 1,

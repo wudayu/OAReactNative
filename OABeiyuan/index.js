@@ -199,7 +199,7 @@ var OABeiyuan = React.createClass({
       case 'UserInfo':
         return Navigator.SceneConfigs.HorizontalSwipeJump;
       case 'WorklateList':
-        return Navigator.SceneConfigs.VerticalUpSwipeJump;
+        return Navigator.SceneConfigs.HorizontalSwipeJump;
       default:
         return Navigator.SceneConfigs.FloatFromBottom;
     }
