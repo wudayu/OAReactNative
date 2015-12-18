@@ -13,6 +13,7 @@ var {
 var Strings = require('../../Values/string');
 // Utils
 var netHandler = require('../../Utils/net');
+var utilHandler = require('../../Utils/util');
 // Elements
 var AppButton = require('../Elements/AppButton'); // 系统主题按钮
 var AppNegButton = require('../Elements/AppNegButton'); // 系统主题镂空按钮
@@ -23,12 +24,12 @@ var styles = require('./style');
 
 var LoginView = React.createClass({
   onPressLogin: function() {
-    var granted = netHandler.loginWithNameAndPwd(this.state.userName, this.state.userPwd, this.props.navigator);
-    if (granted) {
-      this.props.navigator.push({title: Strings.titleUserInfo, id: 'UserInfo'});
-    } else {
-      //this.props.navigator.push({title: Strings.titleUserInfo, id: 'UserInfo'});
-    }
+    netHandler.loginWithNameAndPwd(this.state.userName, this.state.userPwd)
+      .then((response) => response.json())
+      .then((responseJson) => netHandler.handleResponse(responseJson))
+      .then((responseData) => {
+        this.props.navigator.push({title: Strings.titleUserInfo, id: 'UserInfo'});
+      });
   },
   _onTypingUserName: function(text: Object) {
     this.setState({
@@ -42,8 +43,9 @@ var LoginView = React.createClass({
   },
   getInitialState: function() {
     return {
-      userName: null,
-      userPwd: null,
+      // TODO change this to null
+      userName: 'admin',
+      userPwd: 'admin',
       remPwd: null,
     };
   },
