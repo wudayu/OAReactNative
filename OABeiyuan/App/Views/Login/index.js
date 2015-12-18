@@ -1,6 +1,7 @@
 'use strict';
 
 var React = require('react-native');
+var store = require('react-native-simple-store');
 
 var {
   Text,
@@ -11,6 +12,9 @@ var {
 
 // Strings
 var Strings = require('../../Values/string');
+// Utils
+var netHandler = require('../../Utils/net');
+var utilHandler = require('../../Utils/util');
 // Elements
 var AppButton = require('../Elements/AppButton'); // 系统主题按钮
 var AppNegButton = require('../Elements/AppNegButton'); // 系统主题镂空按钮
@@ -18,9 +22,25 @@ var AppCheckBox = require('../Elements/AppCheckBox');
 // Styles
 var styles = require('./style');
 
+
 var LoginView = React.createClass({
   onPressLogin: function() {
-    this.props.navigator.push({title: Strings.titleUserInfo, id: 'UserInfo'})
+    netHandler.loginWithNameAndPwd(this.state.userName, this.state.userPwd)
+      .then((response) => response.json())
+      .then((responseJson) => netHandler.handleResponse(responseJson))
+      .then((responseData) => {
+        if (responseData === null) {
+          return null;
+        }
+        // 存储全局用户信息
+        store.save('userBasic', {
+          userId : responseData.userId,
+          token : responseData.token,
+        });
+
+        // TODO 先获取用户信息, 再跳转页面
+        this.props.navigator.push({title: Strings.titleUserInfo, id: 'UserInfo'});
+      });
   },
   _onTypingUserName: function(text: Object) {
     this.setState({
@@ -34,8 +54,9 @@ var LoginView = React.createClass({
   },
   getInitialState: function() {
     return {
-      userName: null,
-      userPwd: null,
+      // TODO change this to null
+      userName: 'admin',
+      userPwd: 'admin',
       remPwd: null,
     };
   },

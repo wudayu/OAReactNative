@@ -1,6 +1,7 @@
 'use strict';
 
 var React = require('react-native');
+var store = require('react-native-simple-store');
 
 var {
   Text,
@@ -10,6 +11,8 @@ var {
 
 // Strings
 var Strings = require('../../Values/string');
+// Utils
+var utilHandler = require('../../Utils/util');
 // Elements
 var AppButton = require('../Elements/AppButton'); // 系统主题按钮
 var AppNegButton = require('../Elements/AppNegButton'); // 系统主题镂空按钮
