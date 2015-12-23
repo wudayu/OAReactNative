@@ -10,6 +10,7 @@ var Strings = {
   chkRemPwdText: '记住密码',
   titleLogin: '登陆',
   btnLoginText: '登录',
+  btnLoginLoadingText: '登录中...',
   btnForgetText: '忘记密码',
   btnContactText: '联系管理员',
   titleUserInfo: '个人信息',
