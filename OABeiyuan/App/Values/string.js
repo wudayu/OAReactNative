@@ -4,6 +4,7 @@ var Strings = {
   appName: '贝源OA',
   back: '返回',
   add: '添加',
+  edit: '编辑',
   appWelcomeMsg: '欢迎使用贝源OA',
   textInputUser: '请输入账号',
   textInputPwd: '请输入密码',
@@ -30,7 +31,8 @@ var Strings = {
   textWorklateBeginTm: '开始时间',
   textWorklateHours: '持续时间',
   textWorklateAuditStatus: '审核状态',
-  titleWorklateDetail: '新增加班',
+  titleWorklateDetail: '加班详情',
+  titleWorklateDetailAdd: '新增加班',
 };
 
 module.exports = Strings;
