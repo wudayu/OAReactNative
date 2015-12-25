@@ -84,44 +84,44 @@ var WorklateDetailView = React.createClass({
           style={styles.scrollView}>
           <FormItem
             style={styles.formItem}
-            keyHash='type'
+            mapKey='type'
             title={Strings.textWorklateType}
-            valueHash='事假'
+            mapValue='事假'
             editable={this.state.editing}
           />
           <FormItem
             style={styles.formItem}
-            keyHash='applier'
+            mapKey='applier'
             title={Strings.textWorklateApplier}
-            valueHash='吴大宇'
+            mapValue='吴大宇'
             editable={this.state.editing}
           />
           <FormItem
             style={styles.formItem}
-            keyHash='reason'
+            mapKey='reason'
             title={Strings.textWorklateReason}
-            valueHash='家里有事需要回家'
+            mapValue='家里有事需要回家'
             editable={this.state.editing}
           />
           <FormItem
             style={styles.formItem}
-            keyHash='beginTime'
+            mapKey='beginTime'
             title={Strings.textWorklateBeginTm}
-            valueHash='09月11日 13:00'
+            mapValue='09月11日 13:00'
             editable={this.state.editing}
           />
           <FormItem
             style={styles.formItem}
-            keyHash='endTime'
+            mapKey='endTime'
             title={Strings.textWorklateEndTm}
-            valueHash='09月12日 13:00'
+            mapValue='09月12日 13:00'
             editable={this.state.editing}
           />
           <FormItem
             style={styles.formItem}
-            keyHash='auditStatus'
+            mapKey='auditStatus'
             title={Strings.textWorklateAuditStatus}
-            valueHash='正在审核'
+            mapValue='正在审核'
             editable={this.state.editing}
           />
           {buttons}
