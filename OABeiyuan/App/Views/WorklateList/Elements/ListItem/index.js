@@ -22,7 +22,7 @@ var styles = require('./style');
 
 var ListItem = React.createClass({
   _onPress: function() {
-    this.props.navigator.push({worklateId: this.props.worklateId, title: Strings.titleWorklateDetailAdd, id: 'WorklateDetail'});
+    this.props.navigator.push({worklateId: this.props.worklateId, title: Strings.titleWorklateDetail, id: 'WorklateDetail'});
   },
   render: function() {
     return (

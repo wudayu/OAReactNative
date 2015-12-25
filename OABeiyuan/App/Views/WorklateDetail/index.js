@@ -84,79 +84,44 @@ var WorklateDetailView = React.createClass({
           style={styles.scrollView}>
           <FormItem
             style={styles.formItem}
-            keyHash='mobile'
-            title={Strings.promptMobile}
-            valueHash='18651817673'
+            keyHash='type'
+            title={Strings.textWorklateType}
+            valueHash='事假'
             editable={this.state.editing}
           />
           <FormItem
             style={styles.formItem}
-            keyHash='email'
-            title={Strings.promptEmail}
-            valueHash='wudayu@gmail.com'
+            keyHash='applier'
+            title={Strings.textWorklateApplier}
+            valueHash='吴大宇'
             editable={this.state.editing}
           />
           <FormItem
             style={styles.formItem}
-            keyHash='address'
-            title={Strings.promptAddress}
-            valueHash='江苏省南京市玄武区东南大学'
+            keyHash='reason'
+            title={Strings.textWorklateReason}
+            valueHash='家里有事需要回家'
             editable={this.state.editing}
           />
           <FormItem
             style={styles.formItem}
-            keyHash='address'
-            title={Strings.promptAddress}
-            valueHash='江苏省南京市玄武区东南大学'
+            keyHash='beginTime'
+            title={Strings.textWorklateBeginTm}
+            valueHash='09月11日 13:00'
             editable={this.state.editing}
           />
           <FormItem
             style={styles.formItem}
-            keyHash='address'
-            title={Strings.promptAddress}
-            valueHash='江苏省南京市玄武区东南大学'
+            keyHash='endTime'
+            title={Strings.textWorklateEndTm}
+            valueHash='09月12日 13:00'
             editable={this.state.editing}
           />
           <FormItem
             style={styles.formItem}
-            keyHash='address'
-            title={Strings.promptAddress}
-            valueHash='江苏省南京市玄武区东南大学'
-            editable={this.state.editing}
-          />
-          <FormItem
-            style={styles.formItem}
-            keyHash='address'
-            title={Strings.promptAddress}
-            valueHash='江苏省南京市玄武区东南大学'
-            editable={this.state.editing}
-          />
-          <FormItem
-            style={styles.formItem}
-            keyHash='address'
-            title={Strings.promptAddress}
-            valueHash='江苏省南京市玄武区东南大学'
-            editable={this.state.editing}
-          />
-          <FormItem
-            style={styles.formItem}
-            keyHash='address'
-            title={Strings.promptAddress}
-            valueHash='江苏省南京市玄武区东南大学'
-            editable={this.state.editing}
-          />
-          <FormItem
-            style={styles.formItem}
-            keyHash='address'
-            title={Strings.promptAddress}
-            valueHash='江苏省南京市玄武区东南大学'
-            editable={this.state.editing}
-          />
-          <FormItem
-            style={styles.formItem}
-            keyHash='address'
-            title={Strings.promptAddress}
-            valueHash='江苏省南京市玄武区东南大学'
+            keyHash='auditStatus'
+            title={Strings.textWorklateAuditStatus}
+            valueHash='正在审核'
             editable={this.state.editing}
           />
           {buttons}
