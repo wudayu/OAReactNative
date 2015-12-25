@@ -184,10 +184,6 @@ var OABeiyuan = React.createClass({
             handler: () => navigator.pop(),
             tintColor: 'white',
           }}
-          rightButton={{
-            title: Strings.edit,
-            tintColor: 'white',
-          }}
           title={{
             title: route.title,
             tintColor: 'white'

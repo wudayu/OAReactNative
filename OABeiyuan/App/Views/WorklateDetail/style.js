@@ -19,33 +19,6 @@ module.exports = StyleSheet.create({
     right: 0,
     bottom: 0,
   },
-  userBasicInfoPanel: {
-    height: 148,
-    backgroundColor: Colors.appColor,
-    flexDirection: 'row',
-    alignItems: 'center',
-    borderColor: Colors.textAntiAppColor,
-    borderBottomWidth: 1,
-  },
-  userIcon: {
-    width: Dimens.avatarSize,
-    height: Dimens.avatarSize,
-    marginLeft: 20,
-  },
-  basicInfoPanel: {
-    marginLeft: 20,
-  },
-  userNameText: {
-    fontSize: 21,
-    color: Colors.textAntiAppColor,
-  },
-  userDeptText: {
-    fontSize: 16,
-    color: Colors.textAntiAppColor,
-    marginTop: 20,
-  },
-  userDetailPanel: {
-  },
   formItem: {
     height: 55,
   },
@@ -54,11 +27,13 @@ module.exports = StyleSheet.create({
     marginLeft: 15,
     marginRight: 15,
     marginTop: 15,
+    marginBottom: 15,
   },
   editingBtnPanel: {
     flexDirection: 'row',
     justifyContent: 'space-around',
     marginTop: 15,
+    marginBottom: 15,
   },
   editingBtn: {
     height: Dimens.standardAppNegButtonHeight,

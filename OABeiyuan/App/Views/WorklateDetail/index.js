@@ -1,12 +1,15 @@
+/**
+ * 本界面既作为"添加加班界面"也同时作为"修改加班信息界面"
+ */
 'use strict';
 
 var React = require('react-native');
 var store = require('react-native-simple-store');
 
 var {
-  Text,
   View,
-  Image,
+  ScrollView,
+  AlertIOS,
 } = React;
 
 // Strings
@@ -17,12 +20,37 @@ var utilHandler = require('../../Utils/util');
 var AppButton = require('../Elements/AppButton'); // 系统主题按钮
 var AppNegButton = require('../Elements/AppNegButton'); // 系统主题镂空按钮
 var AppNoRadiusButton = require('../Elements/AppNoRadiusButton'); // 系统主题无圆角按钮
-var FormItem = require('./Elements/FormItem'); // 本页面详情表单项
+var FormItem = require('./Elements/FormItem'); // 加班详情表单项
 // Styles
 var styles = require('./style');
 
-var UserInfoView = React.createClass({
+var _worklateId;
+/**
+ * 根据是否传入worklateId来判断是否是修改界面
+ *
+ * @returns {boolean}, true => 是修改界面
+ */
+function isEditUi() {
+  return (_worklateId != null);
+}
+
+var WorklateDetailView = React.createClass({
   getInitialState: function() {
+    // 此赋值语句必不可少
+    _worklateId = this.props.route.worklateId;
+
+    // TODO remove this, is an Example
+    if (isEditUi()) {
+      AlertIOS.alert(
+        'Welcome',
+        'worklateId : ' + _worklateId,
+        [
+          {text: 'OK', onPress: () => console.log('OK Pressed!')},
+          {text: 'Cancel', onPress: () => console.log('Cancel Pressed!'), style: 'cancel'},
+        ]
+      )
+    }
+
     return {
       editing : false,
     };
@@ -51,58 +79,91 @@ var UserInfoView = React.createClass({
 
     return (
       <View style={styles.container}>
-        <View style={styles.userBasicInfoPanel}>
-          <Image
-            style={styles.userIcon}
-            source={require('image!icon_avatar_login_ac')}
-          />
-          <View style={styles.basicInfoPanel}>
-            <Text style={styles.userNameText}>
-              吴大宇
-            </Text>
-            <Text style={styles.userDeptText}>
-              部门：电商事业部
-            </Text>
-          </View>
-        </View>
-        <View style={styles.funcPanel}>
-          <AppNoRadiusButton
-            text={Strings.btnLeaveText}
-            style={styles.funcLeftBtn}
-            onPress={() => this.props.navigator.push({title: Strings.titleWorklateList, id: 'WorklateList'})}
-          />
-          <AppNoRadiusButton
-            text={Strings.btnWorklateText}
-            style={styles.funcRightBtn}
-          />
-        </View>
-        <View style={styles.userDetailPanel}>
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          style={styles.scrollView}>
           <FormItem
             style={styles.formItem}
-            key='mobile'
+            keyHash='mobile'
             title={Strings.promptMobile}
-            value='18651817673'
+            valueHash='18651817673'
             editable={this.state.editing}
           />
           <FormItem
             style={styles.formItem}
-            key='email'
+            keyHash='email'
             title={Strings.promptEmail}
-            value='wudayu@gmail.com'
+            valueHash='wudayu@gmail.com'
             editable={this.state.editing}
           />
           <FormItem
             style={styles.formItem}
-            key='address'
+            keyHash='address'
             title={Strings.promptAddress}
-            value='江苏省南京市玄武区东南大学'
+            valueHash='江苏省南京市玄武区东南大学'
+            editable={this.state.editing}
+          />
+          <FormItem
+            style={styles.formItem}
+            keyHash='address'
+            title={Strings.promptAddress}
+            valueHash='江苏省南京市玄武区东南大学'
+            editable={this.state.editing}
+          />
+          <FormItem
+            style={styles.formItem}
+            keyHash='address'
+            title={Strings.promptAddress}
+            valueHash='江苏省南京市玄武区东南大学'
+            editable={this.state.editing}
+          />
+          <FormItem
+            style={styles.formItem}
+            keyHash='address'
+            title={Strings.promptAddress}
+            valueHash='江苏省南京市玄武区东南大学'
+            editable={this.state.editing}
+          />
+          <FormItem
+            style={styles.formItem}
+            keyHash='address'
+            title={Strings.promptAddress}
+            valueHash='江苏省南京市玄武区东南大学'
+            editable={this.state.editing}
+          />
+          <FormItem
+            style={styles.formItem}
+            keyHash='address'
+            title={Strings.promptAddress}
+            valueHash='江苏省南京市玄武区东南大学'
+            editable={this.state.editing}
+          />
+          <FormItem
+            style={styles.formItem}
+            keyHash='address'
+            title={Strings.promptAddress}
+            valueHash='江苏省南京市玄武区东南大学'
+            editable={this.state.editing}
+          />
+          <FormItem
+            style={styles.formItem}
+            keyHash='address'
+            title={Strings.promptAddress}
+            valueHash='江苏省南京市玄武区东南大学'
+            editable={this.state.editing}
+          />
+          <FormItem
+            style={styles.formItem}
+            keyHash='address'
+            title={Strings.promptAddress}
+            valueHash='江苏省南京市玄武区东南大学'
             editable={this.state.editing}
           />
           {buttons}
-        </View>
+        </ScrollView>
       </View>
     );
   }
 });
 
-module.exports = UserInfoView;
+module.exports = WorklateDetailView;

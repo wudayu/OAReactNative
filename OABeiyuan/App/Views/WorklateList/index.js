@@ -62,7 +62,8 @@ var WorklateView = React.createClass({
     return (
       <ListItem
         style={styles.listItem}
-        worklateId="TODO id"
+        navigator={this.props.navigator}
+        worklateId="我是ididid"
         type="事假"
         applier="吴大宇"
         reason="家里有事需要回家"

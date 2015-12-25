@@ -4,7 +4,6 @@ var Strings = {
   appName: '贝源OA',
   back: '返回',
   add: '添加',
-  edit: '编辑',
   appWelcomeMsg: '欢迎使用贝源OA',
   textInputUser: '请输入账号',
   textInputPwd: '请输入密码',
