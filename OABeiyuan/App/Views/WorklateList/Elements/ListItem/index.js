@@ -22,15 +22,7 @@ var styles = require('./style');
 
 var ListItem = React.createClass({
   _onPress: function() {
-    // TODO jump to edit ui
-    AlertIOS.alert(
-      'Welcome',
-      this.props.worklateId,
-      [
-        {text: 'OK', onPress: () => console.log('OK Pressed!')},
-        {text: 'Cancel', onPress: () => console.log('Cancel Pressed!'), style: 'cancel'},
-      ]
-    )
+    this.props.navigator.push({worklateId: this.props.worklateId, title: Strings.titleWorklateDetail, id: 'WorklateDetail'});
   },
   render: function() {
     return (

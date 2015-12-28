@@ -29,8 +29,10 @@ var Strings = {
   textWorklateReason: '事由',
   textWorklateBeginTm: '开始时间',
   textWorklateHours: '持续时间',
+  textWorklateEndTm: '结束时间',
   textWorklateAuditStatus: '审核状态',
-  titleWorklateDetail: '新增加班',
+  titleWorklateDetail: '加班详情',
+  titleWorklateDetailAdd: '新增加班',
 };
 
 module.exports = Strings;

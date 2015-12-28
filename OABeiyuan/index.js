@@ -19,6 +19,7 @@ var Strings = require('./App/Values/string');
 var LoginView = require('./App/Views/Login');
 var UserInfoView = require('./App/Views/UserInfo');
 var WorklateListView = require('./App/Views/WorklateList');
+var WorklateDetailView = require('./App/Views/WorklateDetail');
 // Styles
 var styles = require('./style');
 
@@ -110,6 +111,14 @@ var OABeiyuan = React.createClass({
         </View>
       )
     }
+    if (route.id === 'WorklateDetail') {
+      return (
+        <View style={styles.container}>
+          <ToolBar navIcon={true} navigator={navigator} route={route} />
+          <WorklateDetailView navigator={navigator} route={route} />
+        </View>
+      )
+    }
   },
 
   /*
@@ -126,7 +135,7 @@ var OABeiyuan = React.createClass({
         navBar = <NavigationBar
           style={styles.navBar}
           title={{
-            title: Strings.appWelcomeMsg,
+            title: route.title,
             tintColor: 'white',
           }}
         />;
@@ -141,7 +150,7 @@ var OABeiyuan = React.createClass({
             tintColor: 'white',
           }}
           title={{
-            title: Strings.titleUserInfo,
+            title: route.title,
             tintColor: 'white'
           }}
         />;
@@ -157,11 +166,26 @@ var OABeiyuan = React.createClass({
           }}
           rightButton={{
             title: Strings.add,
-            handler: () => navigator.push({title:Strings.titleWorklateDetail, id:'WorklateDetail'}),
+            handler: () => navigator.push({title:Strings.titleWorklateDetailAdd, id:'WorklateDetail'}),
             tintColor: 'white',
           }}
           title={{
-            title: Strings.titleWorklateList,
+            title: route.title,
+            tintColor: 'white'
+          }}
+        />;
+        break;
+      case 'WorklateDetail':
+        Component = WorklateDetailView;
+        navBar = <NavigationBar
+          style={styles.navBar}
+          leftButton={{
+            title: Strings.back,
+            handler: () => navigator.pop(),
+            tintColor: 'white',
+          }}
+          title={{
+            title: route.title,
             tintColor: 'white'
           }}
         />;
@@ -200,6 +224,8 @@ var OABeiyuan = React.createClass({
         return Navigator.SceneConfigs.HorizontalSwipeJump;
       case 'WorklateList':
         return Navigator.SceneConfigs.HorizontalSwipeJump;
+      case 'WorklateDetail':
+        return Navigator.SceneConfigs.HorizontalSwipeJump;
       default:
         return Navigator.SceneConfigs.FloatFromBottom;
     }
@@ -226,8 +252,8 @@ var OABeiyuan = React.createClass({
       <Navigator
         debugOverlay={false}
         // 初始化一个初始界面，用id来identify, 这就是界面的入口
-        //initialRoute={{title: Strings.titleWorklateList, id: 'WorklateList'}}
-        initialRoute={{title: Strings.titleLogin, id: 'Login'}}
+        //initialRoute={{title: Strings.appWelcomeMsg, id: 'Login'}}
+        initialRoute={{title: Strings.titleWorklateList, id: 'WorklateList'}}
         // 新页面加载动画方式
         configureScene={configureScene}
         // 新页面绘制方式
