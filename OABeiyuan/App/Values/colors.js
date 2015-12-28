@@ -6,6 +6,7 @@ var Colors = {
   borderColor: 'D2D2D2',
   textAntiAppColor: 'white',
   promptTextColor: '#444444',
+  defaultFontColor: 'black',
 };
 
 module.exports = Colors;

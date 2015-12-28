@@ -22,6 +22,9 @@ module.exports = StyleSheet.create({
   formItem: {
     height: 55,
   },
+  textArea: {
+    height: 120,
+  },
   editBtn: {
     height: Dimens.standardAppButtonHeight,
     marginLeft: 15,

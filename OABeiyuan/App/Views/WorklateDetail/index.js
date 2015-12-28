@@ -9,7 +9,9 @@ var store = require('react-native-simple-store');
 var {
   View,
   ScrollView,
+  Platform,
   AlertIOS,
+  ToastAndroid,
 } = React;
 
 // Strings
@@ -41,14 +43,17 @@ var WorklateDetailView = React.createClass({
 
     // TODO remove this, is an Example
     if (isEditUi()) {
-      AlertIOS.alert(
-        'Welcome',
-        'worklateId : ' + _worklateId,
-        [
-          {text: 'OK', onPress: () => console.log('OK Pressed!')},
-          {text: 'Cancel', onPress: () => console.log('Cancel Pressed!'), style: 'cancel'},
-        ]
-      )
+      if (Platform.OS === 'ios')
+        AlertIOS.alert(
+          'Welcome',
+          'worklateId : ' + _worklateId,
+          [
+            {text: 'OK', onPress: () => console.log('OK Pressed!')},
+            {text: 'Cancel', onPress: () => console.log('Cancel Pressed!'), style: 'cancel'},
+          ]
+        );
+      else
+        ToastAndroid.show('worklateId : ' + _worklateId, ToastAndroid.LONG);
     }
 
     return {
@@ -97,10 +102,11 @@ var WorklateDetailView = React.createClass({
             editable={this.state.editing}
           />
           <FormItem
-            style={styles.formItem}
+            style={[styles.formItem, styles.textArea]}
             mapKey='reason'
             title={Strings.textWorklateReason}
             mapValue='家里有事需要回家'
+            multiline={true}
             editable={this.state.editing}
           />
           <FormItem

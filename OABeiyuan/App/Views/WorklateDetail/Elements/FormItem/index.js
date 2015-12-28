@@ -29,11 +29,12 @@ var AppButton = React.createClass({
             {this.props.title} :
           </Text>
           <TextInput
-            style={this.props.editable ? styles.inputEditing : styles.input}
+            style={[styles.inputBase, this.props.editable ? styles.inputEditing : styles.inputOrigin]}
             placeholder={this.props.placeholder}
             underlineColorAndroid='transparent'
             value={this.props.mapValue}
             editable={this.props.editable}
+            multiline={this.props.multiline}
           />
         </View>
       </View>

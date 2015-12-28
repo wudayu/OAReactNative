@@ -27,19 +27,18 @@ module.exports = StyleSheet.create({
     fontSize: Dimens.promptTextSize,
     marginLeft: 10,
   },
-  input: {
+  inputBase: {
+    fontSize: 17,
     position: 'absolute',
     left: 80,
     right: 10,
     top: 10,
     bottom: 10,
   },
+  inputOrigin: {
+    color: Colors.defaultFontColor,
+  },
   inputEditing: {
     color: Colors.appColor,
-    position: 'absolute',
-    left: 80,
-    right: 10,
-    top: 10,
-    bottom: 10,
   }
 });
