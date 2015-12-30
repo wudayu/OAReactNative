@@ -58,7 +58,12 @@ var WorklateDetailView = React.createClass({
 
     return {
       editing : false,
+      beginTm : '2015年09月24日 9:00',
+      endTm : '2015年09月26日 18:00',
     };
+  },
+  onPressBeginTm: function() {
+    this.setState({modalVisible: true});
   },
   render: function() {
     var buttons = null;
@@ -113,15 +118,18 @@ var WorklateDetailView = React.createClass({
             style={styles.formItem}
             mapKey='beginTime'
             title={Strings.textWorklateBeginTm}
-            mapValue='09月11日 13:00'
-            editable={this.state.editing}
+            mapValue={this.state.beginTm}
+            editable={false}
+            clickToChoose={this.state.editing}
+            onPress={() => this.onPressBeginTm()}
           />
           <FormItem
             style={styles.formItem}
             mapKey='endTime'
             title={Strings.textWorklateEndTm}
-            mapValue='09月12日 13:00'
-            editable={this.state.editing}
+            mapValue={this.state.endTm}
+            editable={false}
+            clickToChoose={this.state.editing}
           />
           <FormItem
             style={styles.formItem}

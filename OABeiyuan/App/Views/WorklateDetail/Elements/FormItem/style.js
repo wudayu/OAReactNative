@@ -10,6 +10,13 @@ var Colors = require('../../../../Values/colors');
 var Dimens = require('../../../../Values/dimens');
 
 module.exports = StyleSheet.create({
+  highLight: {
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+  },
   item: {
     backgroundColor: Colors.textAntiAppColor,
     borderBottomWidth: 1,
