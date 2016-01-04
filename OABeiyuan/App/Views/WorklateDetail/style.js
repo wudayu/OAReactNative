@@ -58,4 +58,9 @@ module.exports = StyleSheet.create({
     flex: 1,
     height: Dimens.standardAppNegButtonHeight,
   },
+  testView: {
+    width: 70,
+    height: 70,
+    borderWidth: 10,
+  },
 });

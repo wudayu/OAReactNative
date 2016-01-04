@@ -12,6 +12,7 @@ var {
   Platform,
   AlertIOS,
   ToastAndroid,
+  Modal,
 } = React;
 
 // Strings
@@ -22,6 +23,7 @@ var utilHandler = require('../../Utils/util');
 var AppButton = require('../Elements/AppButton'); // 系统主题按钮
 var AppNegButton = require('../Elements/AppNegButton'); // 系统主题镂空按钮
 var AppNoRadiusButton = require('../Elements/AppNoRadiusButton'); // 系统主题无圆角按钮
+var CanCloseModal = require('../Elements/CanCloseModal'); // 透明面板
 var FormItem = require('./Elements/FormItem'); // 加班详情表单项
 // Styles
 var styles = require('./style');
@@ -89,6 +91,11 @@ var WorklateDetailView = React.createClass({
 
     return (
       <View style={styles.container}>
+        <CanCloseModal
+          animated={true}
+          visible={true}>
+          <View style={styles.testView} />
+        </CanCloseModal>
         <ScrollView
           showsVerticalScrollIndicator={false}
           style={styles.scrollView}>
