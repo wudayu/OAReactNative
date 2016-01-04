@@ -12,7 +12,6 @@ var {
   Platform,
   AlertIOS,
   ToastAndroid,
-  Modal,
 } = React;
 
 // Strings
@@ -91,11 +90,6 @@ var WorklateDetailView = React.createClass({
 
     return (
       <View style={styles.container}>
-        <CanCloseModal
-          animated={true}
-          visible={true}>
-          <View style={styles.testView} />
-        </CanCloseModal>
         <ScrollView
           showsVerticalScrollIndicator={false}
           style={styles.scrollView}>
@@ -147,6 +141,11 @@ var WorklateDetailView = React.createClass({
           />
           {buttons}
         </ScrollView>
+        <CanCloseModal
+          animated={true}
+          visible={true}>
+          <View />
+        </CanCloseModal>
       </View>
     );
   }

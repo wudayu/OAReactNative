@@ -30,7 +30,7 @@ var AppNegButton = React.createClass({
   render: function() {
     return (
       <View style={this.props.style}>
-        <TouchableOpacity activeOpacity="0.5" style={styles.btnHighLight} onPress={() => this._onPress()}>
+        <TouchableOpacity activeOpacity={0.5} style={styles.btnHighLight} onPress={() => this._onPress()}>
           <View style={styles.btn}>
             <Text style={styles.btnText}>
               {this.props.text}
