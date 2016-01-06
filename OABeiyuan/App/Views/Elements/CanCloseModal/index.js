@@ -24,15 +24,13 @@ var Strings = require('../../../Values/string');
 var styles = require('./style');
 
 var CanCloseModal = React.createClass({
-  _onPress: function() {
-    this.setState({isVisible : false});
-
+  _onDismiss: function() {
     if (this.props.hasOwnProperty('onDismiss')) {
       this.props.onDismiss();
     }
   },
   getInitialState: function() {
-    return {isVisible: this.props.visible};
+    return {visible: this.props.visible};
   },
   render: function() {
     var {visible, transparent, ...otherProps} = this.props;
@@ -40,24 +38,24 @@ var CanCloseModal = React.createClass({
       return (
         <Modal
           {...otherProps}
-          visible={this.state.isVisible}
+          visible={this.props.visible}
           transparent={true}>
           <View style={styles.shadowBase}/>
           <View style={styles.viewBase}>
-            <TouchableOpacity activeOpacity={0.5} style={styles.closeButton} onPress={() => this._onPress()}>
+            <TouchableOpacity activeOpacity={0.5} style={styles.closeButton} onPress={() => this._onDismiss()}>
               <Text style={styles.closeHint}>{Strings.back}</Text>
             </TouchableOpacity>
             {this.props.children}
           </View>
         </Modal>
       );
-    } else if (this.state.isVisible === true) {
+    } else if (this.props.visible === true) {
       // FIXME 由于Modal目前只能在iOS中使用,所以在Android中,暂时使用一个View来代替Modal
       return (
         <View style={styles.androidModelBase}>
           <View style={styles.shadowBase}/>
           <View style={styles.viewBase}>
-            <TouchableOpacity activeOpacity='0.5' style={styles.closeButton} onPress={() => this._onPress()}>
+            <TouchableOpacity activeOpacity='0.5' style={styles.closeButton} onPress={() => this._onDismiss()}>
               <Text style={styles.closeHint}>{Strings.back}</Text>
             </TouchableOpacity>
             {this.props.children}
@@ -67,8 +65,6 @@ var CanCloseModal = React.createClass({
     } else {
       return null;
     }
-
-
   }
 });
 

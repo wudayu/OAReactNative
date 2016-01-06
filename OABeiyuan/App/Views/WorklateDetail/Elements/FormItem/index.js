@@ -18,11 +18,11 @@ var {
   View,
   TextInput,
   TouchableHighlight,
-  AlertIOS,
 } = React;
 
 // Styles
 var styles = require('./style');
+var utilHandler = require('../../../../Utils/util');
 
 var AppButton = React.createClass({
   _onPress: function() {

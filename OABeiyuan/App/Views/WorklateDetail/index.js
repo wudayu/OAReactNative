@@ -16,13 +16,12 @@ var {
 
 // Strings
 var Strings = require('../../Values/string');
-// Utils
 var utilHandler = require('../../Utils/util');
 // Elements
 var AppButton = require('../Elements/AppButton'); // 系统主题按钮
 var AppNegButton = require('../Elements/AppNegButton'); // 系统主题镂空按钮
 var AppNoRadiusButton = require('../Elements/AppNoRadiusButton'); // 系统主题无圆角按钮
-var CanCloseModal = require('../Elements/CanCloseModal'); // 透明面板
+var DatePickerIOSWithModal = require('../Elements/DatePickerIOSWithModal'); // 系统使用Modal的DatePickerIOS
 var FormItem = require('./Elements/FormItem'); // 加班详情表单项
 // Styles
 var styles = require('./style');
@@ -44,27 +43,16 @@ var WorklateDetailView = React.createClass({
 
     // TODO remove this, is an Example
     if (isEditUi()) {
-      if (Platform.OS === 'ios')
-        AlertIOS.alert(
-          'Welcome',
-          'worklateId : ' + _worklateId,
-          [
-            {text: 'OK', onPress: () => console.log('OK Pressed!')},
-            {text: 'Cancel', onPress: () => console.log('Cancel Pressed!'), style: 'cancel'},
-          ]
-        );
-      else
-        ToastAndroid.show('worklateId : ' + _worklateId, ToastAndroid.LONG);
+      utilHandler.show('worklateId : ' + _worklateId);
     }
 
     return {
       editing : false,
-      beginTm : '2015年09月24日 9:00',
-      endTm : '2015年09月26日 18:00',
+      beginTm : new Date(),
+      endTm : new Date(),
+      beginTmVisible: false,
+      endTmVisible: false,
     };
-  },
-  onPressBeginTm: function() {
-    this.setState({modalVisible: true});
   },
   render: function() {
     var buttons = null;
@@ -91,8 +79,7 @@ var WorklateDetailView = React.createClass({
     return (
       <View style={styles.container}>
         <ScrollView
-          showsVerticalScrollIndicator={false}
-          style={styles.scrollView}>
+          showsVerticalScrollIndicator={false}>
           <FormItem
             style={styles.formItem}
             mapKey='type'
@@ -119,18 +106,19 @@ var WorklateDetailView = React.createClass({
             style={styles.formItem}
             mapKey='beginTime'
             title={Strings.textWorklateBeginTm}
-            mapValue={this.state.beginTm}
+            mapValue={this.state.beginTm.toString()}
             editable={false}
             clickToChoose={this.state.editing}
-            onPress={() => this.onPressBeginTm()}
+            onPress={() => this.setState({beginTmVisible: true})}
           />
           <FormItem
             style={styles.formItem}
             mapKey='endTime'
             title={Strings.textWorklateEndTm}
-            mapValue={this.state.endTm}
+            mapValue={this.state.endTm.toString()}
             editable={false}
             clickToChoose={this.state.editing}
+            onPress={() => this.setState({endTmVisible: true})}
           />
           <FormItem
             style={styles.formItem}
@@ -141,11 +129,20 @@ var WorklateDetailView = React.createClass({
           />
           {buttons}
         </ScrollView>
-        <CanCloseModal
-          animated={true}
-          visible={true}>
-          <View />
-        </CanCloseModal>
+        <DatePickerIOSWithModal
+          date={this.state.beginTm}
+          visible={this.state.beginTmVisible}
+          mode='datetime'
+          onConfirmed={(date) => this.setState({beginTm: date, beginTmVisible: false})}
+          onDismiss={() => this.setState({beginTmVisible: false})}
+        />
+        <DatePickerIOSWithModal
+          date={this.state.endTm}
+          visible={this.state.endTmVisible}
+          mode='datetime'
+          onConfirmed={(date) => this.setState({endTm: date, endTmVisible: false})}
+          onDismiss={() => this.setState({endTmVisible: false})}
+        />
       </View>
     );
   }
