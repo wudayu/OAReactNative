@@ -52,7 +52,7 @@ var CanCloseModal = React.createClass({
         </Modal>
       );
     } else if (this.state.isVisible === true) {
-      // FIXME 由于Modal目前只能在iOS中使用,所以暂时使用一个View来代替Modal
+      // FIXME 由于Modal目前只能在iOS中使用,所以在Android中,暂时使用一个View来代替Modal
       return (
         <View style={styles.androidModelBase}>
           <View style={styles.shadowBase}/>

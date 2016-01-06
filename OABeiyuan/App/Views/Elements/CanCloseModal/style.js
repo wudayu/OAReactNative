@@ -35,8 +35,8 @@ module.exports = StyleSheet.create({
   },
   closeButton: {
     position: 'absolute',
-    top: 25,
-    right: 20,
+    top: 15,
+    right: 15,
   },
   closeHint: {
     color: Colors.textAntiAppColor,
