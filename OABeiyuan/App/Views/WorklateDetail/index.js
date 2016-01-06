@@ -10,8 +10,6 @@ var {
   View,
   ScrollView,
   Platform,
-  AlertIOS,
-  ToastAndroid,
 } = React;
 
 // Strings
@@ -37,6 +35,12 @@ function isEditUi() {
 }
 
 var WorklateDetailView = React.createClass({
+  _onSetBeginTm: function() {
+    this.setState({beginTmVisible: true});
+  },
+  _onSetEndTm: function() {
+    this.setState({endTmVisible: true});
+  },
   getInitialState: function() {
     // 此赋值语句必不可少
     _worklateId = this.props.route.worklateId;
@@ -50,6 +54,7 @@ var WorklateDetailView = React.createClass({
       editing : false,
       beginTm : new Date(),
       endTm : new Date(),
+      // iOS使用以下两个参数来控制日期选择的显示与隐藏
       beginTmVisible: false,
       endTmVisible: false,
     };
@@ -74,6 +79,26 @@ var WorklateDetailView = React.createClass({
         text={Strings.btnEditText}
         onPress={() => this.setState({editing : true})}
       />
+    }
+
+    var iOSComponent = null;
+    if (Platform.OS === 'ios') {
+      iOSComponent = <View>
+        <DatePickerIOSWithModal
+          date={this.state.beginTm}
+          visible={this.state.beginTmVisible}
+          mode='datetime'
+          onConfirmed={(date) => this.setState({beginTm: date, beginTmVisible: false})}
+          onDismiss={() => this.setState({beginTmVisible: false})}
+        />
+        <DatePickerIOSWithModal
+          date={this.state.endTm}
+          visible={this.state.endTmVisible}
+          mode='datetime'
+          onConfirmed={(date) => this.setState({endTm: date, endTmVisible: false})}
+          onDismiss={() => this.setState({endTmVisible: false})}
+        />
+      </View>
     }
 
     return (
@@ -109,7 +134,7 @@ var WorklateDetailView = React.createClass({
             mapValue={this.state.beginTm.toString()}
             editable={false}
             clickToChoose={this.state.editing}
-            onPress={() => this.setState({beginTmVisible: true})}
+            onPress={() => this._onSetBeginTm()}
           />
           <FormItem
             style={styles.formItem}
@@ -118,7 +143,7 @@ var WorklateDetailView = React.createClass({
             mapValue={this.state.endTm.toString()}
             editable={false}
             clickToChoose={this.state.editing}
-            onPress={() => this.setState({endTmVisible: true})}
+            onPress={() => this._onSetEndTm()}
           />
           <FormItem
             style={styles.formItem}
@@ -129,20 +154,7 @@ var WorklateDetailView = React.createClass({
           />
           {buttons}
         </ScrollView>
-        <DatePickerIOSWithModal
-          date={this.state.beginTm}
-          visible={this.state.beginTmVisible}
-          mode='datetime'
-          onConfirmed={(date) => this.setState({beginTm: date, beginTmVisible: false})}
-          onDismiss={() => this.setState({beginTmVisible: false})}
-        />
-        <DatePickerIOSWithModal
-          date={this.state.endTm}
-          visible={this.state.endTmVisible}
-          mode='datetime'
-          onConfirmed={(date) => this.setState({endTm: date, endTmVisible: false})}
-          onDismiss={() => this.setState({endTmVisible: false})}
-        />
+        {iOSComponent}
       </View>
     );
   }
