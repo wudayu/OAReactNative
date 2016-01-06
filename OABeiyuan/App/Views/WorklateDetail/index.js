@@ -10,18 +10,16 @@ var {
   View,
   ScrollView,
   Platform,
-  AlertIOS,
-  ToastAndroid,
 } = React;
 
 // Strings
 var Strings = require('../../Values/string');
-// Utils
 var utilHandler = require('../../Utils/util');
 // Elements
 var AppButton = require('../Elements/AppButton'); // 系统主题按钮
 var AppNegButton = require('../Elements/AppNegButton'); // 系统主题镂空按钮
 var AppNoRadiusButton = require('../Elements/AppNoRadiusButton'); // 系统主题无圆角按钮
+var DatePickerIOSWithModal = require('../Elements/DatePickerIOSWithModal'); // 系统使用Modal的DatePickerIOS
 var FormItem = require('./Elements/FormItem'); // 加班详情表单项
 // Styles
 var styles = require('./style');
@@ -37,33 +35,29 @@ function isEditUi() {
 }
 
 var WorklateDetailView = React.createClass({
+  _onSetBeginTm: function() {
+    this.setState({beginTmVisible: true});
+  },
+  _onSetEndTm: function() {
+    this.setState({endTmVisible: true});
+  },
   getInitialState: function() {
     // 此赋值语句必不可少
     _worklateId = this.props.route.worklateId;
 
     // TODO remove this, is an Example
     if (isEditUi()) {
-      if (Platform.OS === 'ios')
-        AlertIOS.alert(
-          'Welcome',
-          'worklateId : ' + _worklateId,
-          [
-            {text: 'OK', onPress: () => console.log('OK Pressed!')},
-            {text: 'Cancel', onPress: () => console.log('Cancel Pressed!'), style: 'cancel'},
-          ]
-        );
-      else
-        ToastAndroid.show('worklateId : ' + _worklateId, ToastAndroid.LONG);
+      utilHandler.show('worklateId : ' + _worklateId);
     }
 
     return {
       editing : false,
-      beginTm : '2015年09月24日 9:00',
-      endTm : '2015年09月26日 18:00',
+      beginTm : new Date(),
+      endTm : new Date(),
+      // iOS使用以下两个参数来控制日期选择的显示与隐藏
+      beginTmVisible: false,
+      endTmVisible: false,
     };
-  },
-  onPressBeginTm: function() {
-    this.setState({modalVisible: true});
   },
   render: function() {
     var buttons = null;
@@ -87,11 +81,30 @@ var WorklateDetailView = React.createClass({
       />
     }
 
+    var iOSComponent = null;
+    if (Platform.OS === 'ios') {
+      iOSComponent = <View>
+        <DatePickerIOSWithModal
+          date={this.state.beginTm}
+          visible={this.state.beginTmVisible}
+          mode='datetime'
+          onConfirmed={(date) => this.setState({beginTm: date, beginTmVisible: false})}
+          onDismiss={() => this.setState({beginTmVisible: false})}
+        />
+        <DatePickerIOSWithModal
+          date={this.state.endTm}
+          visible={this.state.endTmVisible}
+          mode='datetime'
+          onConfirmed={(date) => this.setState({endTm: date, endTmVisible: false})}
+          onDismiss={() => this.setState({endTmVisible: false})}
+        />
+      </View>
+    }
+
     return (
       <View style={styles.container}>
         <ScrollView
-          showsVerticalScrollIndicator={false}
-          style={styles.scrollView}>
+          showsVerticalScrollIndicator={false}>
           <FormItem
             style={styles.formItem}
             mapKey='type'
@@ -118,18 +131,19 @@ var WorklateDetailView = React.createClass({
             style={styles.formItem}
             mapKey='beginTime'
             title={Strings.textWorklateBeginTm}
-            mapValue={this.state.beginTm}
+            mapValue={this.state.beginTm.toString()}
             editable={false}
             clickToChoose={this.state.editing}
-            onPress={() => this.onPressBeginTm()}
+            onPress={() => this._onSetBeginTm()}
           />
           <FormItem
             style={styles.formItem}
             mapKey='endTime'
             title={Strings.textWorklateEndTm}
-            mapValue={this.state.endTm}
+            mapValue={this.state.endTm.toString()}
             editable={false}
             clickToChoose={this.state.editing}
+            onPress={() => this._onSetEndTm()}
           />
           <FormItem
             style={styles.formItem}
@@ -140,6 +154,7 @@ var WorklateDetailView = React.createClass({
           />
           {buttons}
         </ScrollView>
+        {iOSComponent}
       </View>
     );
   }

@@ -30,7 +30,7 @@ var AppNegButton = React.createClass({
     return (
       <View style={this.props.style}>
         <TouchableOpacity
-          activeOpacity="0.5"
+          activeOpacity={0.5}
           style={styles.btnHighLight}
           onPress={() => this._onPress(this.props.checked)}>
           <Image
