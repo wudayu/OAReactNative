@@ -10,6 +10,7 @@ var {
   View,
   ScrollView,
   Platform,
+  NativeModules,
 } = React;
 
 // Strings
@@ -36,7 +37,12 @@ function isEditUi() {
 
 var WorklateDetailView = React.createClass({
   _onSetBeginTm: function() {
-    this.setState({beginTmVisible: true});
+    if (Platform.OS === 'ios')
+      this.setState({beginTmVisible: true});
+    else
+      NativeModules.DateAndroid.showDateTimepicker(function() {}, function(hour, minute) {
+        utilHandler.show(hour + ":" + minute);
+      });
   },
   _onSetEndTm: function() {
     this.setState({endTmVisible: true});
