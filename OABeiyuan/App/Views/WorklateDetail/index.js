@@ -37,15 +37,32 @@ function isEditUi() {
 
 var WorklateDetailView = React.createClass({
   _onSetBeginTm: function() {
-    if (Platform.OS === 'ios')
+    var beginTmStr = null;
+    var _this = this;
+    if (Platform.OS === 'ios') {
       this.setState({beginTmVisible: true});
-    else
-      NativeModules.DateAndroid.showDateTimepicker(function() {}, function(hour, minute) {
-        utilHandler.show(hour + ":" + minute);
+    } else {
+      // Android 专用日期控件,分日期和时间两次选择
+      NativeModules.DateAndroid.showDatepicker(function () {}, function (year, month, day) {
+        NativeModules.DateAndroid.showTimepicker(function () {}, function (hour, minute) {
+          _this.setState({beginTm: new Date(year, month, day, hour, minute, 0)});
+        });
       });
+    }
   },
   _onSetEndTm: function() {
-    this.setState({endTmVisible: true});
+    var endTmStr = null;
+    var _this = this;
+    if (Platform.OS === 'ios') {
+      this.setState({endTmVisible: true});
+    } else {
+      // Android 专用日期控件,分日期和时间两次选择
+      NativeModules.DateAndroid.showDatepicker(function () {}, function (year, month, day) {
+        NativeModules.DateAndroid.showTimepicker(function () {}, function (hour, minute) {
+          _this.setState({endTm: new Date(year, month, day, hour, minute, 0)});
+        });
+      });
+    }
   },
   getInitialState: function() {
     // 此赋值语句必不可少
@@ -137,7 +154,7 @@ var WorklateDetailView = React.createClass({
             style={styles.formItem}
             mapKey='beginTime'
             title={Strings.textWorklateBeginTm}
-            mapValue={this.state.beginTm.toString()}
+            mapValue={utilHandler.getDateStringFromObject(this.state.beginTm)}
             editable={false}
             clickToChoose={this.state.editing}
             onPress={() => this._onSetBeginTm()}
@@ -146,7 +163,7 @@ var WorklateDetailView = React.createClass({
             style={styles.formItem}
             mapKey='endTime'
             title={Strings.textWorklateEndTm}
-            mapValue={this.state.endTm.toString()}
+            mapValue={utilHandler.getDateStringFromObject(this.state.endTm)}
             editable={false}
             clickToChoose={this.state.editing}
             onPress={() => this._onSetEndTm()}
