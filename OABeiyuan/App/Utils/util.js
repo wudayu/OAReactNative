@@ -5,6 +5,7 @@ var {
   AlertIOS,
   Platform,
   ToastAndroid,
+  Dimensions,
 } = React;
 
 /**
@@ -40,4 +41,22 @@ exports.getDateStringFromObject = function(dateObject: Date) {
     dateObject.getMinutes() + '分';
 
   return dateStr;
+}
+
+/**
+ * 获取设备高度
+ *
+ * @returns 设备高度
+ */
+exports.getDeviceHeight = function() {
+  return Dimensions.get('window').height;
+}
+
+/**
+ * 获取设备宽度
+ *
+ * @returns 设备宽度
+ */
+exports.getDeviceWidth = function() {
+  return Dimensions.get('window').width;
 }

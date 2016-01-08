@@ -11,6 +11,7 @@ var {
   ScrollView,
   Platform,
   NativeModules,
+  PickerItemIOS,
 } = React;
 
 // Strings
@@ -21,11 +22,18 @@ var AppButton = require('../Elements/AppButton'); // 系统主题按钮
 var AppNegButton = require('../Elements/AppNegButton'); // 系统主题镂空按钮
 var AppNoRadiusButton = require('../Elements/AppNoRadiusButton'); // 系统主题无圆角按钮
 var DatePickerIOSWithModal = require('../Elements/DatePickerIOSWithModal'); // 系统使用Modal的DatePickerIOS
+var AnimatedPickerIOS = require('../Elements/AnimatedPickerIOS') // 系统动态选择项(仅iOS)
 var FormItem = require('./Elements/FormItem'); // 加班详情表单项
 // Styles
 var styles = require('./style');
 
 var _worklateId;
+
+
+
+
+
+var showtimes = [{time: '12:30'},{time: '2:30'},{time: '4:30'}, {time:'5:30'}, {time:'6:30'}, {time:'7:00'}, {time:'8:30'}];
 /**
  * 根据是否传入worklateId来判断是否是修改界面
  *
@@ -80,6 +88,10 @@ var WorklateDetailView = React.createClass({
       // iOS使用以下两个参数来控制日期选择的显示与隐藏
       beginTmVisible: false,
       endTmVisible: false,
+      // iOS使用以下参数来控制单选项的显示与隐藏
+      animatedPickerVisible: false,
+      // 用来标志当前选中的是第几个"类型"
+      currType: 0,
     };
   },
   render: function() {
@@ -104,9 +116,9 @@ var WorklateDetailView = React.createClass({
       />
     }
 
-    var iOSComponent = null;
+    var iOSDatepicker = null;
     if (Platform.OS === 'ios') {
-      iOSComponent = <View>
+      iOSDatepicker = <View>
         <DatePickerIOSWithModal
           date={this.state.beginTm}
           visible={this.state.beginTmVisible}
@@ -124,6 +136,25 @@ var WorklateDetailView = React.createClass({
       </View>
     }
 
+    var iOSAnimatedPicker = null;
+    if (Platform.OS === 'ios' && this.state.animatedPickerVisible) {
+      iOSAnimatedPicker = (
+        <AnimatedPickerIOS
+          // FIXME onConfirmed 除了消失Picker的状态外,还需要设置相应的值
+          onConfirmed={() => this.setState({ animatedPickerVisible: false})}
+          onValueChange={(itemIndex) => utilHandler.show("无法单向绑定picker的数据")}//this.setState({currType: itemIndex})}
+          currIndex={this.state.currType}>
+          {Object.keys(showtimes).map((item, itemIndex) => (
+            <PickerItemIOS
+              key={'_' + itemIndex}
+              value={itemIndex}
+              label={showtimes[item].time}
+            />
+          ))}
+        </AnimatedPickerIOS>
+      );
+    }
+
     return (
       <View style={styles.container}>
         <ScrollView
@@ -133,7 +164,9 @@ var WorklateDetailView = React.createClass({
             mapKey='type'
             title={Strings.textWorklateType}
             mapValue='事假'
-            editable={this.state.editing}
+            editable={false}
+            clickToChoose={this.state.editing}
+            onPress={() => this.setState({animatedPickerVisible: true})}
           />
           <FormItem
             style={styles.formItem}
@@ -177,7 +210,8 @@ var WorklateDetailView = React.createClass({
           />
           {buttons}
         </ScrollView>
-        {iOSComponent}
+        {iOSDatepicker}
+        {iOSAnimatedPicker}
       </View>
     );
   }

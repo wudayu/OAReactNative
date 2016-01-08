@@ -1,7 +1,7 @@
 /**
  * Usage:
  * 属性：
- *  animated: 用作显示此按钮上的文字 TODO rewrite
+ *  animated: 是否使用动画过渡
  *  visible: 是否显示此Modal
  *  onDismiss: 关闭时的回调
  */
