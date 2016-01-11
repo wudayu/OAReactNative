@@ -7,21 +7,20 @@ var {
 } = React;
 
 var Colors = require('../../../Values/colors');
-var Dimens = require('../../../Values/dimens');
 
 module.exports = StyleSheet.create({
   showtime: {
     padding:20,
-    textAlign: 'center'
+    textAlign: 'center',
   },
   chooseButtonContainer: {
     backgroundColor: 'transparent',
     flexDirection: 'row',
     justifyContent: 'flex-end',
-    borderTopColor: '#e2e2e2',
+    borderTopColor: Colors.borderColor,
     borderTopWidth: 1,
-    borderBottomColor: '#e2e2e2',
-    borderBottomWidth:1
+    borderBottomColor: Colors.borderColor,
+    borderBottomWidth: 1,
   },
   chooseButton: {
     paddingRight: 10,
@@ -29,9 +28,9 @@ module.exports = StyleSheet.create({
     paddingBottom: 10
   },
   buttonText: {
-    textAlign: 'center'
+    textAlign: 'center',
   },
   chooseButtonText: {
-    color: '027afe'
+    color: Colors.appColor,
   },
 });
