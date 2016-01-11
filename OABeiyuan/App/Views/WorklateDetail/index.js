@@ -22,7 +22,7 @@ var AppButton = require('../Elements/AppButton'); // 系统主题按钮
 var AppNegButton = require('../Elements/AppNegButton'); // 系统主题镂空按钮
 var AppNoRadiusButton = require('../Elements/AppNoRadiusButton'); // 系统主题无圆角按钮
 var DatePickerIOSWithModal = require('../Elements/DatePickerIOSWithModal'); // 系统使用Modal的DatePickerIOS
-var AnimatedPickerIOS = require('../Elements/AnimatedPickerIOS') // 系统动态选择项(仅iOS)
+var AnimatedPickerIOS = require('../Elements/AnimatedPickerIOS'); // 系统动态选择项(仅iOS)
 var FormItem = require('./Elements/FormItem'); // 加班详情表单项
 // Styles
 var styles = require('./style');
@@ -156,6 +156,10 @@ var WorklateDetailView = React.createClass({
           ))}
         </AnimatedPickerIOS>
       );
+    } else if (this.state.animatedPickerVisible === true) {
+      NativeModules.DialogPicker.showDialogPicker({'111', '222', '333'}, null, function (index) {
+        utilHandler.show('点击了' + index);
+      });
     }
 
     return (

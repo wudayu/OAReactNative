@@ -9,6 +9,7 @@ import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactRootView;
 import com.facebook.react.modules.core.DefaultHardwareBackBtnHandler;
 import com.facebook.react.shell.MainReactPackage;
+import com.wudayu.react.reactdialogpicker.ReactDialogPickerPackage;
 
 import me.nucleartux.date.ReactDatePackage;
 
@@ -28,6 +29,7 @@ public class MainActivity extends FragmentActivity implements DefaultHardwareBac
                 .setJSMainModuleName("index.android")
                 .addPackage(new MainReactPackage())
                 .addPackage(new ReactDatePackage(this)) // register react date package here
+                .addPackage(new ReactDialogPickerPackage(this)) // register react dialog picker here
                 .setUseDeveloperSupport(BuildConfig.DEBUG)
                 .setInitialLifecycleState(LifecycleState.RESUMED)
                 .build();
