@@ -29,11 +29,13 @@ var styles = require('./style');
 
 var _worklateId;
 
+var itemTypes = [
+  {id: '0x001', type: '事假'},
+  {id: '0x002', type: '婚嫁'},
+  {id: '0x003', type: '病假'},
+  {id: '0x004', type:'丧假'}
+];
 
-
-
-
-var showtimes = [{time: '12:30'},{time: '2:30'},{time: '4:30'}, {time:'5:30'}, {time:'6:30'}, {time:'7:00'}, {time:'8:30'}];
 /**
  * 根据是否传入worklateId来判断是否是修改界面
  *
@@ -92,6 +94,8 @@ var WorklateDetailView = React.createClass({
       animatedPickerVisible: false,
       // 用来标志当前选中的是第几个"类型"
       currType: 0,
+      // 用来标志当前确认的是第几个"类型"
+      confirmedType: 0,
     };
   },
   render: function() {
@@ -140,15 +144,14 @@ var WorklateDetailView = React.createClass({
     if (Platform.OS === 'ios' && this.state.animatedPickerVisible) {
       iOSAnimatedPicker = (
         <AnimatedPickerIOS
-          // FIXME onConfirmed 除了消失Picker的状态外,还需要设置相应的值
-          onConfirmed={() => this.setState({ animatedPickerVisible: false})}
-          onValueChange={(itemIndex) => utilHandler.show("无法单向绑定picker的数据")}//this.setState({currType: itemIndex})}
+          onConfirmed={() => this.setState({animatedPickerVisible: false, confirmedType: this.state.currType})}
+          onValueChange={(itemIndex) => this.setState({currType: itemIndex})}
           currIndex={this.state.currType}>
-          {Object.keys(showtimes).map((item, itemIndex) => (
+          {Object.keys(itemTypes).map((item, itemIndex) => (
             <PickerItemIOS
               key={'_' + itemIndex}
               value={itemIndex}
-              label={showtimes[item].time}
+              label={itemTypes[item].type}
             />
           ))}
         </AnimatedPickerIOS>
@@ -163,7 +166,7 @@ var WorklateDetailView = React.createClass({
             style={styles.formItem}
             mapKey='type'
             title={Strings.textWorklateType}
-            mapValue='事假'
+            mapValue={itemTypes[this.state.confirmedType].type}
             editable={false}
             clickToChoose={this.state.editing}
             onPress={() => this.setState({animatedPickerVisible: true})}

@@ -1,6 +1,9 @@
 /**
  * Usage:
  * 属性：
+ *  currIndex: 当前选中的项
+ *  onValueChange: 在值改变时的事件
+ *  onConfirmed: 在值被确认的事件
  */
 
 'use strict';
@@ -44,7 +47,7 @@ var AnimatedPicker = React.createClass({
   },
   _onValueChange(itemIndex) {
     if (this.props.hasOwnProperty('onValueChange')) {
-      this.props.onValueChange();
+      this.props.onValueChange(itemIndex);
     }
   },
   render() {
