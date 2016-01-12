@@ -29,12 +29,20 @@ var styles = require('./style');
 
 var _worklateId;
 
-var itemTypes = [
-  {id: '0x001', type: '事假'},
-  {id: '0x002', type: '婚嫁'},
-  {id: '0x003', type: '病假'},
-  {id: '0x004', type:'丧假'}
+let itemTypes = [
+  {id: '0x001', type: '工作未结需加班'},
+  {id: '0x002', type: '版本发布需加班'},
+  {id: '0x003', type: '协助他人需加班'},
+  {id: '0x004', type: '工作依赖需加班'},
 ];
+
+function getItemTypesStr() {
+  var strs = new Array();
+  for (var i = 0; i < itemTypes.length; ++i) {
+    strs[i] = itemTypes[i].type;
+  }
+  return strs;
+}
 
 /**
  * 根据是否传入worklateId来判断是否是修改界面
@@ -74,17 +82,19 @@ var WorklateDetailView = React.createClass({
       });
     }
   },
+  /**
+   *当选择了不同的'类型'事件
+   */
+  _onSetItemType: function(itemIndex) {
+    this.setState({animatedPickerVisible: false, confirmedType: itemIndex});
+  },
   getInitialState: function() {
     // 此赋值语句必不可少
     _worklateId = this.props.route.worklateId;
 
-    // TODO remove this, is an Example
-    if (isEditUi()) {
-      utilHandler.show('worklateId : ' + _worklateId);
-    }
-
     return {
       editing : false,
+      // TODO use real data from server
       beginTm : new Date(),
       endTm : new Date(),
       // iOS使用以下两个参数来控制日期选择的显示与隐藏
@@ -92,10 +102,10 @@ var WorklateDetailView = React.createClass({
       endTmVisible: false,
       // iOS使用以下参数来控制单选项的显示与隐藏
       animatedPickerVisible: false,
-      // 用来标志当前选中的是第几个"类型"
+      // iOS用来标志当前选中的是第几个"类型"
       currType: 0,
-      // 用来标志当前确认的是第几个"类型"
-      confirmedType: 0,
+      // 用来标志当前确认使用的是第几个"类型"
+      confirmedType: 1,
     };
   },
   render: function() {
@@ -142,9 +152,10 @@ var WorklateDetailView = React.createClass({
 
     var iOSAnimatedPicker = null;
     if (Platform.OS === 'ios' && this.state.animatedPickerVisible) {
+      // PickerIOS
       iOSAnimatedPicker = (
         <AnimatedPickerIOS
-          onConfirmed={() => this.setState({animatedPickerVisible: false, confirmedType: this.state.currType})}
+          onConfirmed={() => this._onSetItemType(this.state.currType)}
           onValueChange={(itemIndex) => this.setState({currType: itemIndex})}
           currIndex={this.state.currType}>
           {Object.keys(itemTypes).map((item, itemIndex) => (
@@ -157,8 +168,10 @@ var WorklateDetailView = React.createClass({
         </AnimatedPickerIOS>
       );
     } else if (this.state.animatedPickerVisible === true) {
-      NativeModules.DialogPicker.showDialogPicker({'111', '222', '333'}, null, function (index) {
-        utilHandler.show('点击了' + index);
+      var _this = this;
+      // PickerAndroid
+      NativeModules.DialogPicker.showDialogPicker(getItemTypesStr(), null, function (object) {
+        _this._onSetItemType(object.index);
       });
     }
 
@@ -186,7 +199,7 @@ var WorklateDetailView = React.createClass({
             style={[styles.formItem, styles.textArea]}
             mapKey='reason'
             title={Strings.textWorklateReason}
-            mapValue='家里有事需要回家'
+            mapValue='移动端需要整理,准备发布版本'
             multiline={true}
             editable={this.state.editing}
           />
