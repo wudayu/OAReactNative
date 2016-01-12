@@ -124,8 +124,7 @@ var LoginView = React.createClass({
             <TextInput
               style={styles.textInput}
               placeholder={Strings.textInputPwd}
-              // FIXME Android 在使用此属性时,会出bug,暂时注释掉
-              // secureTextEntry='true'
+              secureTextEntry={true}
               underlineColorAndroid='transparent'
               onChangeText={(text) => this._onTypingUserPwd({text})}
               value={this.state.userPwd}
