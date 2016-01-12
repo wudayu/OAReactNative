@@ -106,7 +106,13 @@ var OABeiyuan = React.createClass({
     if (route.id === 'WorklateList') {
       return (
         <View style={styles.container}>
-          <ToolBar navIcon={true} navigator={navigator} route={route} />
+          <ToolBar
+            navIcon={true}
+            navigator={navigator}
+            route={route}
+            actions={[{title: Strings.add, show: 'always', icon: require('image!ic_arrow_plus_white'), showWithText: false }]}
+            onActionSelected={() => navigator.push({title:Strings.titleWorklateDetailAdd, id:'WorklateDetail'})}
+          />
           <WorklateListView navigator={navigator} route={route} />
         </View>
       )
@@ -252,10 +258,10 @@ var OABeiyuan = React.createClass({
       <Navigator
         debugOverlay={false}
         // 初始化一个初始界面，用id来identify, 这就是界面的入口
-        //initialRoute={{title: Strings.appWelcomeMsg, id: 'Login'}}
+        initialRoute={{title: Strings.appWelcomeMsg, id: 'Login'}}
         //initialRoute={{title: Strings.titleUserInfo, id: 'UserInfo'}}
         //initialRoute={{title: Strings.titleWorklateList, id: 'WorklateList'}}
-        initialRoute={{title: Strings.titleWorklateDetail, id: 'WorklateDetail'}}
+        //initialRoute={{title: Strings.titleWorklateDetail, id: 'WorklateDetail'}}
         // 新页面加载动画方式
         configureScene={configureScene}
         // 新页面绘制方式

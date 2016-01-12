@@ -26,6 +26,7 @@ var styles = require('./style');
 
 var LoginView = React.createClass({
   onPressLogin: function() {
+    /** TODO Uncomment this
     // 将按钮置为载入状态(有耗时任务)
     this.setState({isLoading: true});
     netHandler.loginWithNameAndPwd(this.state.userName, this.state.userPwd)
@@ -43,12 +44,17 @@ var LoginView = React.createClass({
           token : responseData.token,
         });
 
-        // TODO 先获取用户信息, 再跳转页面
+        // FIXME 先获取用户信息, 再跳转页面
         this.props.navigator.push({title: Strings.titleUserInfo, id: 'UserInfo'});
       }).catch((error) => {
         // 将按钮置为非载入状态(无耗时任务)
         this.setState({isLoading: false});
       });
+    */
+    /**
+     * TODO Delete code below
+     */
+    this.props.navigator.push({title: Strings.titleUserInfo, id: 'UserInfo'});
   },
   _onTypingUserName: function(text: Object) {
     this.setState({
