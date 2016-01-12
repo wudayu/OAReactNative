@@ -1,6 +1,7 @@
 'use strict';
 
 var React = require('react-native');
+var store = require('react-native-simple-store');
 
 var {
   Text,
@@ -10,6 +11,8 @@ var {
 
 // Strings
 var Strings = require('../../Values/string');
+// Utils
+var utilHandler = require('../../Utils/util');
 // Elements
 var AppButton = require('../Elements/AppButton'); // 系统主题按钮
 var AppNegButton = require('../Elements/AppNegButton'); // 系统主题镂空按钮
@@ -70,28 +73,29 @@ var UserInfoView = React.createClass({
           <AppNoRadiusButton
             text={Strings.btnWorklateText}
             style={styles.funcRightBtn}
+            onPress={() => this.props.navigator.push({title: Strings.titleWorklateList, id: 'WorklateList'})}
           />
         </View>
         <View style={styles.userDetailPanel}>
           <FormItem
             style={styles.formItem}
-            id='mobile'
+            mapKey='mobile'
             title={Strings.promptMobile}
-            value='18651817673'
+            mapValue='18651817673'
             editable={this.state.editing}
           />
           <FormItem
             style={styles.formItem}
-            id='email'
+            mapKey='email'
             title={Strings.promptEmail}
-            value='wudayu@gmail.com'
+            mapValue='wudayu@gmail.com'
             editable={this.state.editing}
           />
           <FormItem
             style={styles.formItem}
-            id='address'
+            mapKey='address'
             title={Strings.promptAddress}
-            value='江苏省南京市玄武区东南大学'
+            mapValue='江苏省南京市玄武区东南大学'
             editable={this.state.editing}
           />
           {buttons}

@@ -11,7 +11,7 @@ var Dimens = require('../../../../Values/dimens');
 
 module.exports = StyleSheet.create({
   item: {
-    backgroundColor: Colors.white,
+    backgroundColor: Colors.textAntiAppColor,
     borderBottomWidth: 1,
     borderColor: Colors.borderColor,
     position: 'absolute',

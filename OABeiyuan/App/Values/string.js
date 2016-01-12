@@ -3,12 +3,15 @@
 var Strings = {
   appName: '贝源OA',
   back: '返回',
+  add: '添加',
+  confirm: '确认',
   appWelcomeMsg: '欢迎使用贝源OA',
   textInputUser: '请输入账号',
   textInputPwd: '请输入密码',
   chkRemPwdText: '记住密码',
   titleLogin: '登陆',
   btnLoginText: '登录',
+  btnLoginLoadingText: '登录中...',
   btnForgetText: '忘记密码',
   btnContactText: '联系管理员',
   titleUserInfo: '个人信息',
@@ -20,6 +23,17 @@ var Strings = {
   promptMobile: '手机',
   promptEmail: '电子邮件',
   promptAddress: '居住地址',
+  titleWorklateList: '加班记录',
+  promptLoadingWorklate: '正在载入加班历史列表...',
+  textWorklateType: '类型',
+  textWorklateApplier: '申请人',
+  textWorklateReason: '事由',
+  textWorklateBeginTm: '开始时间',
+  textWorklateHours: '持续时间',
+  textWorklateEndTm: '结束时间',
+  textWorklateAuditStatus: '审核状态',
+  titleWorklateDetail: '加班详情',
+  titleWorklateDetailAdd: '新增加班',
 };
 
 module.exports = Strings;

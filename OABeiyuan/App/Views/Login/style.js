@@ -37,11 +37,11 @@ module.exports = StyleSheet.create({
   },
   welcomeText: {
     fontSize: 20,
-    color: Colors.white,
+    color: Colors.textAntiAppColor,
     marginBottom: 20,
   },
   inputPanel: {
-    backgroundColor: Colors.white,
+    backgroundColor: Colors.textAntiAppColor,
     height: 88,
     borderTopColor: Colors.borderColor,
     borderTopWidth: 1,

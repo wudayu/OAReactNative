@@ -1,6 +1,7 @@
 'use strict';
 
 var React = require('react-native');
+var store = require('react-native-simple-store');
 
 var {
   Text,
@@ -11,16 +12,49 @@ var {
 
 // Strings
 var Strings = require('../../Values/string');
+// Utils
+var netHandler = require('../../Utils/net');
+var utilHandler = require('../../Utils/util');
 // Elements
 var AppButton = require('../Elements/AppButton'); // 系统主题按钮
+var AppUnclickableButton = require('../Elements/AppUnclickableButton'); // 系统主题按钮
 var AppNegButton = require('../Elements/AppNegButton'); // 系统主题镂空按钮
 var AppCheckBox = require('../Elements/AppCheckBox');
 // Styles
 var styles = require('./style');
 
+
 var LoginView = React.createClass({
   onPressLogin: function() {
-    this.props.navigator.push({title: Strings.titleUserInfo, id: 'UserInfo'})
+    /** TODO Uncomment this
+    // 将按钮置为载入状态(有耗时任务)
+    this.setState({isLoading: true});
+    netHandler.loginWithNameAndPwd(this.state.userName, this.state.userPwd)
+      .then((response) => response.json())
+      .then((responseJson) => netHandler.handleResponse(responseJson))
+      .then((responseData) => {
+        // 将按钮置为非载入状态(无耗时任务)
+        this.setState({isLoading: false});
+        if (responseData === null) {
+          return null;
+        }
+        // 存储全局用户信息
+        store.save('userBasic', {
+          userId : responseData.userId,
+          token : responseData.token,
+        });
+
+        // FIXME 先获取用户信息, 再跳转页面
+        this.props.navigator.push({title: Strings.titleUserInfo, id: 'UserInfo'});
+      }).catch((error) => {
+        // 将按钮置为非载入状态(无耗时任务)
+        this.setState({isLoading: false});
+      });
+    */
+    /**
+     * TODO Delete code below
+     */
+    this.props.navigator.push({title: Strings.titleUserInfo, id: 'UserInfo'});
   },
   _onTypingUserName: function(text: Object) {
     this.setState({
@@ -32,11 +66,27 @@ var LoginView = React.createClass({
       userPwd: text.text,
     });
   },
+  getLoginBtn: function() {
+    if (this.state.isLoading) {
+      return <AppUnclickableButton
+        style={styles.loginBtn}
+        text={Strings.btnLoginLoadingText}
+      />
+    } else {
+      return <AppButton
+        style={styles.loginBtn}
+        text={Strings.btnLoginText}
+        onPress={this.onPressLogin}
+      />
+    }
+  },
   getInitialState: function() {
     return {
-      userName: null,
-      userPwd: null,
+      // TODO change this to null
+      userName: 'admin',
+      userPwd: 'admin',
       remPwd: null,
+      isLoading: false,
     };
   },
   render: function() {
@@ -90,11 +140,7 @@ var LoginView = React.createClass({
           />
         </View>
         <View style={styles.loginBtnPanel}>
-          <AppButton
-            style={styles.loginBtn}
-            text={Strings.btnLoginText}
-            onPress={this.onPressLogin}
-          />
+          {this.getLoginBtn()}
         </View>
         <View style={styles.userOptionPanel}>
           <AppNegButton
