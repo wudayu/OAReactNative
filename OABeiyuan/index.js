@@ -258,9 +258,9 @@ var OABeiyuan = React.createClass({
       <Navigator
         debugOverlay={false}
         // 初始化一个初始界面，用id来identify, 这就是界面的入口
-        initialRoute={{title: Strings.appWelcomeMsg, id: 'Login'}}
+        //initialRoute={{title: Strings.appWelcomeMsg, id: 'Login'}}
         //initialRoute={{title: Strings.titleUserInfo, id: 'UserInfo'}}
-        //initialRoute={{title: Strings.titleWorklateList, id: 'WorklateList'}}
+        initialRoute={{title: Strings.titleWorklateList, id: 'WorklateList'}}
         //initialRoute={{title: Strings.titleWorklateDetail, id: 'WorklateDetail'}}
         // 新页面加载动画方式
         configureScene={configureScene}
