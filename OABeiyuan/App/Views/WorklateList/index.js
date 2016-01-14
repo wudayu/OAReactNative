@@ -2,8 +2,6 @@
 
 var React = require('react-native');
 
-import PTRView from 'react-native-pull-to-refresh';
-
 var {
   Text,
   View,
@@ -23,11 +21,6 @@ var styles = require('./style');
 var REQUEST_URL = 'https://raw.githubusercontent.com/facebook/react-native/master/docs/MoviesExample.json';
 
 var WorklateView = React.createClass({
-  _refresh: function() {
-    return new Promise((resolve) => {
-      setTimeout(()=>{resolve()}, 2000)
-    });
-  },
   getInitialState: function() {
     return {
       dataSource: new ListView.DataSource({
@@ -59,12 +52,10 @@ var WorklateView = React.createClass({
   },
   renderLoadedListView: function() {
     return (
-      <PTRView onRefresh={this._refresh}>
-        <ListView
-          dataSource={this.state.dataSource}
-          renderRow={this.renderWorklate}
-        />
-      </PTRView>
+      <ListView
+        dataSource={this.state.dataSource}
+        renderRow={this.renderWorklate}
+      />
     );
   },
   renderWorklate: function(worklate) {

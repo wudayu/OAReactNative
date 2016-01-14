@@ -8,7 +8,6 @@
   "dependencies": {
     "react-native": "^0.15.0",
     "react-native-date": "^1.0.2",
-    "react-native-navbar": "^1.0.7",
-    "react-native-pull-to-refresh": "^1.0.0"
+    "react-native-navbar": "^1.0.7"
   }
 }
