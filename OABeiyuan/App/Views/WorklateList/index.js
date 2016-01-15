@@ -1,15 +1,15 @@
 'use strict';
 
 var React = require('react-native');
+var GiftedListView = require('react-native-gifted-listview');
 
 var {
-  Text,
   View,
-  ListView,
-} = React;
+  } = React;
 
 // Strings
 var Strings = require('../../Values/string');
+var utilHandler = require('../../Utils/util');
 // Elements
 var AppButton = require('../Elements/AppButton'); // 系统主题按钮
 var AppNegButton = require('../Elements/AppNegButton'); // 系统主题镂空按钮
@@ -21,44 +21,51 @@ var styles = require('./style');
 var REQUEST_URL = 'https://raw.githubusercontent.com/facebook/react-native/master/docs/MoviesExample.json';
 
 var WorklateView = React.createClass({
-  getInitialState: function() {
-    return {
-      dataSource: new ListView.DataSource({
-        rowHasChanged: (row1, row2) => row1 !== row2,
-      }),
-      loaded: false,
-    };
+  /**
+   * 会在刷新时调用(第一次调用也是刷新)
+   *
+   * @param {number} page, 查询第几页
+   * @param {function} callback, 传递数据数组到callback函数
+   * @param {object} options, 第一次加载的选项
+   */
+  onFetchData: function(page = 1, callback, options) {
+    fetch(REQUEST_URL)
+      .then((response) => response.json())
+      .then((responseData) => {
+        callback(responseData.movies, {
+          allLoaded: false, // 无更多数据时,改为true
+        });
+      })
+      .done();
   },
   render: function() {
-    var content = null;
-
-    if (!this.state.loaded) {
-      content = this.renderLoadingView();
-    } else {
-      content = this.renderLoadedListView();
-    }
     return (
       <View style={styles.container}>
-        {content}
+        {this.renderGiftedView()}
       </View>
     );
   },
-  renderLoadingView: function() {
+  renderGiftedView: function() {
     return (
-      <Text style={styles.promptLoading}>
-        {Strings.promptLoadingWorklate}
-      </Text>
-    );
-  },
-  renderLoadedListView: function() {
-    return (
-      <ListView
-        dataSource={this.state.dataSource}
-        renderRow={this.renderWorklate}
+      <GiftedListView
+        rowView={this.renderRowView}
+        onFetch={this.onFetchData}
+        firstLoader={true} // 显示第一次加载Loader(加载动画)
+        pagination={true} // 开启无限加载下一页
+        refreshable={true} // 开启下拉刷新
+        withSections={false} // 关闭sections
+        refreshableDistance={30}
+        customStyles={{
+          refreshableView: {backgroundColor: '#eee'}
+        }}
+        PullToRefreshViewAndroidProps={{
+          colors: ['#ff0000', '#00ff00', '#0000ff'],
+          progressBackgroundColor: '#c8c7cc',
+        }}
       />
     );
   },
-  renderWorklate: function(worklate) {
+  renderRowView: function(worklate) {
     return (
       <ListItem
         style={styles.listItem}
@@ -72,20 +79,6 @@ var WorklateView = React.createClass({
         auditStatus="审核通过"
       />
     );
-  },
-  componentDidMount: function() {
-    this.fetchData();
-  },
-  fetchData: function() {
-    fetch(REQUEST_URL)
-      .then((response) => response.json())
-      .then((responseData) => {
-        this.setState({
-          dataSource: this.state.dataSource.cloneWithRows(responseData.movies),
-          loaded: true,
-        });
-      })
-      .done();
   },
 });
 
