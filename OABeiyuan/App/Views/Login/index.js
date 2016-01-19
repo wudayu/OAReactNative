@@ -23,15 +23,17 @@ var AppCheckBox = require('../Elements/AppCheckBox');
 // Styles
 var styles = require('./style');
 
+var remPwd = false;
+var userName = 'enhao';
+var userPwd = '156';
 
 var LoginView = React.createClass({
-  onPressLogin: function() {
-    /** TODO Uncomment this
+  onPressLogin: function () {
     // 将按钮置为载入状态(有耗时任务)
     this.setState({isLoading: true});
     netHandler.loginWithNameAndPwd(this.state.userName, this.state.userPwd)
       .then((response) => response.json())
-      .then((responseJson) => netHandler.handleResponse(responseJson))
+      .then((responseJson) => netHandler.handleResponse(responseJson, this.props.navigator))
       .then((responseData) => {
         // 将按钮置为非载入状态(无耗时任务)
         this.setState({isLoading: false});
@@ -40,21 +42,49 @@ var LoginView = React.createClass({
         }
         // 存储全局用户信息
         store.save('userBasic', {
-          userId : responseData.userId,
-          token : responseData.token,
+          userId: responseData.userId,
+          token: responseData.token,
         });
+        // 存储记住密码信息
+        store.save('savePwd', {
+          remPwd: this.state.remPwd,
+          userName: this.state.userName,
+          userPwd: this.state.remPwd ? this.state.userPwd : '',
+        });
+        // 如果不记住密码,将密码框清空
+        if (!this.state.remPwd) {
+          this.setState({userPwd: ''});
+        }
 
-        // FIXME 先获取用户信息, 再跳转页面
-        this.props.navigator.push({title: Strings.titleUserInfo, id: 'UserInfo'});
+        // 获取用户信息,跳转用户详情界面
+        this.getUserInfo(responseData.userId, responseData.token);
+
       }).catch((error) => {
         // 将按钮置为非载入状态(无耗时任务)
         this.setState({isLoading: false});
       });
-    */
-    /**
-     * TODO Delete code below
-     */
-    this.props.navigator.push({title: Strings.titleUserInfo, id: 'UserInfo'});
+  },
+  getUserInfo: function(userId: string, token: string) {
+    // 将按钮置为载入状态(有耗时任务)
+    this.setState({isLoading: true});
+    netHandler.getUserById(userId, token, userId)
+      .then((response) => response.json())
+      .then((responseJson) => netHandler.handleResponse(responseJson, this.props.navigator))
+      .then((responseData) => {
+        // 将按钮置为非载入状态(无耗时任务)
+        this.setState({isLoading: false});
+        // 跳转页面到用户详情
+        this.props.navigator.push({title: Strings.titleUserInfo, id: 'UserInfo',
+          name: responseData.name,
+          deptName: responseData.deptName,
+          moblie: responseData.moblie,
+          email: responseData.email,
+          address: responseData.address,
+        });
+      }).catch((error) => {
+      // 将按钮置为非载入状态(无耗时任务)
+      this.setState({isLoading: false});
+    });
   },
   _onTypingUserName: function(text: Object) {
     this.setState({
@@ -80,12 +110,21 @@ var LoginView = React.createClass({
       />
     }
   },
+  getDefaultProps: function() {
+    // 先获取之前保存的记住密码状态
+    store.get('savePwd').then((savePwd) => {
+      remPwd = savePwd.remPwd;
+      userName = savePwd.userName;
+      userPwd = savePwd.userPwd;
+    });
+  },
   getInitialState: function() {
+
+
     return {
-      // TODO change this to null
-      userName: 'admin',
-      userPwd: 'admin',
-      remPwd: null,
+      userName: userName,
+      userPwd: userPwd,
+      remPwd: remPwd,
       isLoading: false,
     };
   },

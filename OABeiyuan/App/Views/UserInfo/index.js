@@ -58,10 +58,10 @@ var UserInfoView = React.createClass({
           />
           <View style={styles.basicInfoPanel}>
             <Text style={styles.userNameText}>
-              吴大宇
+              {this.props.route.name}
             </Text>
             <Text style={styles.userDeptText}>
-              部门：电商事业部
+              部门：{this.props.route.deptName}
             </Text>
           </View>
         </View>
@@ -81,21 +81,21 @@ var UserInfoView = React.createClass({
             style={styles.formItem}
             mapKey='mobile'
             title={Strings.promptMobile}
-            mapValue='18651817673'
+            mapValue={this.props.route.mobile}
             editable={this.state.editing}
           />
           <FormItem
             style={styles.formItem}
             mapKey='email'
             title={Strings.promptEmail}
-            mapValue='wudayu@gmail.com'
+            mapValue={this.props.route.email}
             editable={this.state.editing}
           />
           <FormItem
             style={styles.formItem}
             mapKey='address'
             title={Strings.promptAddress}
-            mapValue='江苏省南京市玄武区东南大学'
+            mapValue={this.props.route.address}
             editable={this.state.editing}
           />
           {buttons}
