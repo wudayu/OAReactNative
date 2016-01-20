@@ -64,6 +64,26 @@ function toQueryString(obj) {
 }
 
 /**
+ * 使用Post方式进行请求
+ *
+ * @param url 请求的url
+ * @param params 请求的参数,以对象格式
+ * @returns {*}
+ */
+function fetchByPost(url: string, params: object) {
+  return fetch(url, {
+    method: 'POST',
+    headers: {
+      // 服务器返回数据格式
+      'Accept': 'application/json',
+      // 传向服务器的数据格式
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    body: toQueryString(params)
+  })
+}
+
+/**
  * 登录接口,获取userId&token
  *
  * @param userName 用户名
@@ -86,19 +106,99 @@ exports.loginWithNameAndPwd = function(userName: string, userPwd: string) {
 exports.getUserById = function(userId: string, token: string, employeeId: string) {
   var REQUEST_URL = ADDRESS + 'appuser/getUserById';
 
-  return fetch(REQUEST_URL, {
-    method: 'POST',
-    headers: {
-      // 服务器返回数据格式
-      'Accept': 'application/json',
-      // 传向服务器的数据格式
-      'Content-Type': 'application/x-www-form-urlencoded',
-    },
-    body: toQueryString({
-      'id': userId,
-      'token': token,
-      'employeeId': employeeId,
-    })
+  return fetchByPost(REQUEST_URL, {
+    id: userId,
+    token: token,
+    employeeId: employeeId,
   });
 };
 
+/**
+ * 获取系统常量
+ *
+ * @returns {*}
+ */
+exports.getFinalValue = function() {
+  var REQUEST_URL = ADDRESS + 'appuser/getFinalValue';
+
+  return fetchByPost(REQUEST_URL);
+}
+
+/**
+ * 获取用户列表
+ *
+ * @param currentPage
+ * @param pageSize
+ * @returns {*}
+ */
+exports.getUserList = function(currentPage, pageSize) {
+  var REQUEST_URL = ADDRESS + 'appuser/getUserList';
+
+  return fetchByPost(REQUEST_URL, {
+    currentpage: currentPage,
+    pagesize: pageSize,
+  });
+}
+
+/** 几种常量格式, getFinalValue
+ // 下一级审批人
+ "audits": [
+ {
+   "childList": null,
+   "ext1": null,
+   "ext2": null,
+   "label": "席凯",
+   "value": "6"
+ }
+ ],
+ // 审批类型
+ "auditTypes": [
+ {
+   "childList": null,
+   "code": "1",
+   "createTm": 1450423324000,
+   "createTmStr": "2015-12-18 15:22",
+   "ext1": null,
+   "ext2": null,
+   "id": 55,
+   "label": "已提交",
+   "name": "已提交",
+   "remarks": "",
+   "sortNum": 1,
+   "status": 1,
+   "statusStr": "使用中",
+   "typeName": "审核状态",
+   "value": "1"
+ },
+ ],
+ // 请假类型
+ "leaveTypes": [
+ {
+   "childList": null,
+   "ext1": null,
+   "ext2": null,
+   "label": "调休",
+   "value": "7"
+ }
+ ],
+ // 加班类型
+ "worklateTypes": [
+ {
+   "childList": null,
+   "code": "1",
+   "createTm": 1450162549000,
+   "createTmStr": "2015-12-15 14:55",
+   "ext1": null,
+   "ext2": null,
+   "id": 50,
+   "label": "工作日",
+   "name": "工作日",
+   "remarks": "工作日加班",
+   "sortNum": 1,
+   "status": 1,
+   "statusStr": "使用中",
+   "typeName": "加班类型",
+   "value": "1"
+ },
+ ]
+ */

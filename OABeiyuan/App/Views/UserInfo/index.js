@@ -12,6 +12,7 @@ var {
 // Strings
 var Strings = require('../../Values/string');
 // Utils
+var netHandler = require('../../Utils/net');
 var utilHandler = require('../../Utils/util');
 // Elements
 var AppButton = require('../Elements/AppButton'); // 系统主题按钮
@@ -21,11 +22,29 @@ var FormItem = require('./Elements/FormItem'); // 本页面详情表单项
 // Styles
 var styles = require('./style');
 
+var testValue;
 var UserInfoView = React.createClass({
+  getDefaultProps: function() {
+    // TODO remove this, it's example
+    store.get('finalValue').then((finalValue) => {
+      testValue = finalValue.auditTypes[0].typeName;
+    });
+  },
   getInitialState: function() {
     return {
       editing : false,
     };
+  },
+  // TODO remove this, it's example
+  _testFinal: function() {
+    utilHandler.show(testValue);
+    //netHandler.getUserList(1, 5)
+    //  .then((response) => response.json())
+    //  .then((responseJson) => netHandler.handleResponse(responseJson, this.props.navigator))
+    //  .then((responseData) => {
+    //    utilHandler.show(responseData);
+    //  }).catch((error) => {
+    //});
   },
   render: function() {
     var buttons = null;
@@ -69,6 +88,7 @@ var UserInfoView = React.createClass({
           <AppNoRadiusButton
             text={Strings.btnLeaveText}
             style={styles.funcLeftBtn}
+            onPress={this._testFinal}
           />
           <AppNoRadiusButton
             text={Strings.btnWorklateText}

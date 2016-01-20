@@ -56,6 +56,8 @@ var LoginView = React.createClass({
           this.setState({userPwd: ''});
         }
 
+        // 获取全局常量
+        this.getFinalValue();
         // 获取用户信息,跳转用户详情界面
         this.getUserInfo(responseData.userId, responseData.token);
 
@@ -63,6 +65,20 @@ var LoginView = React.createClass({
         // 将按钮置为非载入状态(无耗时任务)
         this.setState({isLoading: false});
       });
+  },
+  getFinalValue: function() {
+    netHandler.getFinalValue()
+      .then((response) => response.json())
+      .then((responseJson) => netHandler.handleResponse(responseJson, this.props.navigator))
+      .then((responseData) => {
+        store.save('finalValue', {
+          auditTypes: responseData.auditTypes,
+          leaveTypes: responseData.leaveTypes,
+          worklateTypes: responseData.worklateTypes,
+        });
+      }).catch((error) => {
+      // 将按钮置为非载入状态(无耗时任务)
+    });
   },
   getUserInfo: function(userId: string, token: string) {
     // 将按钮置为载入状态(有耗时任务)
@@ -119,8 +135,6 @@ var LoginView = React.createClass({
     });
   },
   getInitialState: function() {
-
-
     return {
       userName: userName,
       userPwd: userPwd,
@@ -196,3 +210,4 @@ var LoginView = React.createClass({
 });
 
 module.exports = LoginView;
+
