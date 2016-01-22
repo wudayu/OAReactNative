@@ -128,9 +128,11 @@ var WorklateDetailView = React.createClass({
       // 用来标志当前确认使用的是第几个"类型"
       confirmedType: isEditUi() ? this.props.route.itemType : 0,
       // iOS用来标志当前选中的是第几个"下一级审批人"
-      currAudit: isEditUi() ? this.props.route.auditId : 0,
+      // FIXME use isEditUi() 因为编辑情况下,不方便使用审核
+      currAudit: 0, //isEditUi() ? this.props.route.auditId : 0,
       // 用来标志当前确认使用的是第几个"下一级审批人"
-      confirmedAudit: isEditUi() ? this.props.route.auditId : 0,
+      // FIXME use isEditUi()
+      confirmedAudit: 0, //isEditUi() ? this.props.route.auditId : 0,
     };
   },
   render: function() {
@@ -231,7 +233,7 @@ var WorklateDetailView = React.createClass({
           style={styles.formItem}
           mapKey='auditsStatus'
           title={Strings.textWorklateAuditStatus}
-          mapValue='正在审核'
+          mapValue={this.props.route.auditStatus}
           editable={this.state.editing}
       />
     }

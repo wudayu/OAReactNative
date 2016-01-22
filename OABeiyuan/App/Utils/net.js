@@ -164,7 +164,7 @@ exports.getWorklateList = function(userId: string, token: string, applyId: strin
    "value": "6"
  }
  ],
- // 审批类型
+ // 审批类型,暂时无需使用
  "auditTypes": [
  {
    "childList": null,
