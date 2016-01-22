@@ -32,6 +32,7 @@ var Strings = {
   textWorklateHours: '持续时间',
   textWorklateEndTm: '结束时间',
   textWorklateAuditStatus: '审核状态',
+  textWorklateAudits: '审核人',
   titleWorklateDetail: '加班详情',
   titleWorklateDetailAdd: '新增加班',
 };

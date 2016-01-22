@@ -1,5 +1,7 @@
 /**
  * 本界面既作为"添加加班界面"也同时作为"修改加班信息界面"
+ *
+ * this.props.route.worklateId为传入的具体加班项目id
  */
 'use strict';
 
@@ -29,19 +31,24 @@ var styles = require('./style');
 
 var _worklateId;
 
-let itemTypes = [
-  {id: '0x001', type: '工作未结需加班'},
-  {id: '0x002', type: '版本发布需加班'},
-  {id: '0x003', type: '协助他人需加班'},
-  {id: '0x004', type: '工作依赖需加班'},
-];
+// 加班类型
+var itemTypes = null;
+// 审核人
+var audits = null;
 
 function getItemTypesStr() {
   var strs = new Array();
   for (var i = 0; i < itemTypes.length; ++i) {
-    strs[i] = itemTypes[i].type;
+    strs[i] = itemTypes[i].label;
   }
   return strs;
+}
+function getAuditsStr() {
+  var auditsStrs = new Array();
+  for (var i = 0; i < auditsStrs.length; ++i) {
+    auditsStrs = audits[i].label;
+  }
+  return auditsStrs;
 }
 
 /**
@@ -86,7 +93,20 @@ var WorklateDetailView = React.createClass({
    *当选择了不同的'类型'事件
    */
   _onSetItemType: function(itemIndex) {
-    this.setState({animatedPickerVisible: false, confirmedType: itemIndex});
+    this.setState({itemTypePickerVisible: false, confirmedType: itemIndex});
+  },
+  /**
+   *当选择了不同的'下一级审核人'事件
+   */
+  _onSetAudit: function(itemIndex) {
+    this.setState({auditsPickerVisible: false, confirmedAudit: itemIndex});
+  },
+  getDefaultProps: function() {
+    // 初始化数据
+    store.get('finalValue').then((finalValue) => {
+      itemTypes = finalValue.worklateTypes;
+      audits = finalValue.audits;
+    });
   },
   getInitialState: function() {
     // 此赋值语句必不可少
@@ -101,11 +121,16 @@ var WorklateDetailView = React.createClass({
       beginTmVisible: false,
       endTmVisible: false,
       // iOS使用以下参数来控制单选项的显示与隐藏
-      animatedPickerVisible: false,
+      itemTypePickerVisible: false, // 类型选择框是否显示
+      auditsPickerVisible: false, // 审批人选择框是否显示
       // iOS用来标志当前选中的是第几个"类型"
       currType: 0,
       // 用来标志当前确认使用的是第几个"类型"
       confirmedType: 1,
+      // iOS用来标志当前选中的是第几个"下一级审批人"
+      currAudit: 0,
+      // 用来标志当前确认使用的是第几个"下一级审批人"
+      confirmedAudit: 0,
     };
   },
   render: function() {
@@ -150,10 +175,10 @@ var WorklateDetailView = React.createClass({
       </View>
     }
 
-    var iOSAnimatedPicker = null;
-    if (Platform.OS === 'ios' && this.state.animatedPickerVisible) {
+    var iOSItemTypePicker = null;
+    if (Platform.OS === 'ios' && this.state.itemTypePickerVisible) {
       // PickerIOS
-      iOSAnimatedPicker = (
+      iOSItemTypePicker = (
         <AnimatedPickerIOS
           onConfirmed={() => this._onSetItemType(this.state.currType)}
           onValueChange={(itemIndex) => this.setState({currType: itemIndex})}
@@ -162,17 +187,53 @@ var WorklateDetailView = React.createClass({
             <PickerItemIOS
               key={'_' + itemIndex}
               value={itemIndex}
-              label={itemTypes[item].type}
+              label={itemTypes[item].label}
             />
           ))}
         </AnimatedPickerIOS>
       );
-    } else if (this.state.animatedPickerVisible === true) {
+    } else if (this.state.itemTypePickerVisible === true) {
       var _this = this;
       // PickerAndroid
       NativeModules.DialogPicker.showDialogPicker(getItemTypesStr(), null, function (object) {
         _this._onSetItemType(object.index);
       });
+    }
+
+    var iOSAuditsPicker = null;
+    if (Platform.OS === 'ios' && this.state.auditsPickerVisible) {
+      // PickerIOS
+      iOSAuditsPicker = (
+        <AnimatedPickerIOS
+          onConfirmed={() => this._onSetAudit(this.state.currAudit)}
+          onValueChange={(itemIndex) => this.setState({currAudit: itemIndex})}
+          currIndex={this.state.currAudit}>
+          {Object.keys(audits).map((item, itemIndex) => (
+            <PickerItemIOS
+              key={'_' + itemIndex}
+              value={itemIndex}
+              label={audits[item].label}
+            />
+          ))}
+        </AnimatedPickerIOS>
+      );
+    } else if (this.state.auditsPickerVisible === true) {
+      var _this = this;
+      // PickerAndroid
+      NativeModules.DialogPicker.showDialogPicker(getItemTypesStr(), null, function (object) {
+        _this._onSetAudit(object.index);
+      });
+    }
+
+    var auditsStatusView = null;
+    if (isEditUi()) {
+      auditsStatusView = <FormItem
+          style={styles.formItem}
+          mapKey='auditsStatus'
+          title={Strings.textWorklateAuditStatus}
+          mapValue='正在审核'
+          editable={this.state.editing}
+      />
     }
 
     return (
@@ -183,10 +244,10 @@ var WorklateDetailView = React.createClass({
             style={styles.formItem}
             mapKey='type'
             title={Strings.textWorklateType}
-            mapValue={itemTypes[this.state.confirmedType].type}
+            mapValue={itemTypes[this.state.confirmedType].label}
             editable={false}
             clickToChoose={this.state.editing}
-            onPress={() => this.setState({animatedPickerVisible: true})}
+            onPress={() => this.setState({itemTypePickerVisible: true})}
           />
           <FormItem
             style={styles.formItem}
@@ -223,15 +284,19 @@ var WorklateDetailView = React.createClass({
           />
           <FormItem
             style={styles.formItem}
-            mapKey='auditStatus'
-            title={Strings.textWorklateAuditStatus}
-            mapValue='正在审核'
-            editable={this.state.editing}
+            mapKey='audits'
+            title={Strings.textWorklateAudits}
+            mapValue={audits[this.state.confirmedAudit].label}
+            editable={false}
+            clickToChoose={this.state.editing}
+            onPress={() => this.setState({auditsPickerVisible: true})}
           />
+          {auditsStatusView}
           {buttons}
         </ScrollView>
         {iOSDatepicker}
-        {iOSAnimatedPicker}
+        {iOSItemTypePicker}
+        {iOSAuditsPicker}
       </View>
     );
   }

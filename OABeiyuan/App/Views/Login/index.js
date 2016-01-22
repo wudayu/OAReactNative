@@ -72,6 +72,7 @@ var LoginView = React.createClass({
       .then((responseJson) => netHandler.handleResponse(responseJson, this.props.navigator))
       .then((responseData) => {
         store.save('finalValue', {
+          audits: responseData.audits,
           auditTypes: responseData.auditTypes,
           leaveTypes: responseData.leaveTypes,
           worklateTypes: responseData.worklateTypes,

@@ -35,7 +35,7 @@ var UserInfoView = React.createClass({
       editing : false,
     };
   },
-  // TODO remove this, it's example
+  // TODO remove this, it's an example
   _testFinal: function() {
     utilHandler.show(testValue);
     //netHandler.getUserList(1, 5)
