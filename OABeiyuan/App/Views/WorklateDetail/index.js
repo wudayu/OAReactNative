@@ -114,9 +114,9 @@ var WorklateDetailView = React.createClass({
 
     return {
       editing : false,
-      // TODO use real data from server
-      beginTm : new Date(),
-      endTm : new Date(),
+      reason: isEditUi() ? this.props.route.reason : '',
+      beginTm: isEditUi() ? this.props.route.beginTm : new Date(),
+      endTm: isEditUi() ? this.props.route.endTm : new Date(),
       // iOS使用以下两个参数来控制日期选择的显示与隐藏
       beginTmVisible: false,
       endTmVisible: false,
@@ -124,13 +124,13 @@ var WorklateDetailView = React.createClass({
       itemTypePickerVisible: false, // 类型选择框是否显示
       auditsPickerVisible: false, // 审批人选择框是否显示
       // iOS用来标志当前选中的是第几个"类型"
-      currType: 0,
+      currType: isEditUi() ? this.props.route.itemType : 0,
       // 用来标志当前确认使用的是第几个"类型"
-      confirmedType: 1,
+      confirmedType: isEditUi() ? this.props.route.itemType : 0,
       // iOS用来标志当前选中的是第几个"下一级审批人"
-      currAudit: 0,
+      currAudit: isEditUi() ? this.props.route.auditId : 0,
       // 用来标志当前确认使用的是第几个"下一级审批人"
-      confirmedAudit: 0,
+      confirmedAudit: isEditUi() ? this.props.route.auditId : 0,
     };
   },
   render: function() {
@@ -253,14 +253,14 @@ var WorklateDetailView = React.createClass({
             style={styles.formItem}
             mapKey='applier'
             title={Strings.textWorklateApplier}
-            mapValue='吴大宇'
+            mapValue={isEditUi() ? this.props.route.applierName : ''}
             editable={this.state.editing}
           />
           <FormItem
             style={[styles.formItem, styles.textArea]}
             mapKey='reason'
             title={Strings.textWorklateReason}
-            mapValue='移动端需要整理,准备发布版本'
+            mapValue={this.state.reason}
             multiline={true}
             editable={this.state.editing}
           />

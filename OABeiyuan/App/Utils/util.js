@@ -34,6 +34,9 @@ exports.show = function(msg: string) {
  * @returns Date String
  */
 exports.getDateStringFromObject = function(dateObject: Date) {
+  if (dateObject == null)
+    return '';
+
   var dateStr = dateObject.getFullYear().toString() + '年' +
     (dateObject.getMonth() + 1) + '月' +
     dateObject.getDate() + '日 ' +

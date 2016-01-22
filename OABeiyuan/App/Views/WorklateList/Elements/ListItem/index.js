@@ -6,6 +6,7 @@
 'use strict';
 
 var React = require('react-native');
+var store = require('react-native-simple-store');
 
 var {
   Text,
@@ -17,12 +18,32 @@ var {
 
 // Strings
 var Strings = require('../../../../Values/string');
+var utilHandler = require('../../../../Utils/util');
 // Styles
 var styles = require('./style');
 
+// 加班类型数组
+var itemTypes = null;
+
 var ListItem = React.createClass({
+  getDefaultProps: function() {
+    store.get('finalValue').then((finalValue) => {
+      itemTypes = finalValue.worklateTypes;
+    });
+  },
   _onPress: function() {
-    this.props.navigator.push({worklateId: this.props.worklateId, title: Strings.titleWorklateDetail, id: 'WorklateDetail'});
+    this.props.navigator.push({title: Strings.titleWorklateDetail, id: 'WorklateDetail',
+      worklateId: this.props.worklateId,
+      itemType: this.props.type,
+      applierId: this.props.applierId,
+      applierName: this.props.applier,
+      reason: this.props.reason,
+      beginTm: this.props.beginTime,
+      endTm: this.props.endTime,
+      lastHours: this.props.lastHours,
+      auditId: this.props.auditId,
+      auditStatus: this.props.auditStatus,
+    });
   },
   render: function() {
     return (
@@ -31,7 +52,7 @@ var ListItem = React.createClass({
           <View style={styles.item}>
             <View style={styles.rowBlock}>
               <Text style={styles.sigContent}>
-                {Strings.textWorklateType} : {this.props.type}
+                {Strings.textWorklateType} : {itemTypes[this.props.type].label}
               </Text>
               <Text style={styles.sigContent}>
                 {Strings.textWorklateApplier} : {this.props.applier}
@@ -42,7 +63,7 @@ var ListItem = React.createClass({
             </View>
             <View style={styles.rowBlock}>
               <Text style={styles.sigContent}>
-                {Strings.textWorklateBeginTm} : {this.props.beginTime}
+                {Strings.textWorklateBeginTm} : {utilHandler.getDateStringFromObject(this.props.beginTime)}
               </Text>
               <Text style={styles.sigContent}>
                 {Strings.textWorklateHours} : {this.props.lastHours}

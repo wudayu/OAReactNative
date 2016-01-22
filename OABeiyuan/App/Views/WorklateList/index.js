@@ -24,17 +24,12 @@ let PAGE_SIZE = 10;
 
 var userId = null;
 var token = null;
-// 加班类型数组
-var itemTypes = null;
 
 var WorklateView = React.createClass({
   getDefaultProps: function() {
     store.get('userBasic').then((userBasic) => {
       userId = userBasic.userId;
       token = userBasic.token;
-    });
-    store.get('finalValue').then((finalValue) => {
-      itemTypes = finalValue.worklateTypes;
     });
   },
   /**
@@ -92,11 +87,14 @@ var WorklateView = React.createClass({
         style={styles.listItem}
         navigator={this.props.navigator}
         worklateId={worklate.id}
-        type={itemTypes[worklate.overtimeType].label}
+        type={worklate.overtimeType}
+        applierId={worklate.applierId}
         applier={worklate.applierName}
         reason={worklate.overtimeReason}
-        beginTime={utilHandler.getDateStringFromObject(new Date(worklate.applyTm))}
+        beginTime={new Date(worklate.beginTm)}
+        endTime={new Date(worklate.endTm)}
         lastHours={worklate.lastTm}
+        auditId={worklate.auditor}
         auditStatus={worklate.auditStatus}
       />
     );
