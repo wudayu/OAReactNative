@@ -140,7 +140,18 @@ exports.getUserList = function(currentPage, pageSize) {
   });
 }
 
-exports.getWorklateList
+exports.getWorklateList = function(userId: string, token: string, applyId: string, date: number, currentPage, pageSize) {
+  var REQUEST_URL = ADDRESS + 'appworklate/getWorklateList';
+
+  return fetchByPost(REQUEST_URL, {
+    userId: userId,
+    token: token,
+    applyId: applyId,
+    date: date,
+    currentpage: currentPage,
+    pagesize: pageSize,
+  });
+}
 
 /** 几种常量格式, getFinalValue
  // 下一级审批人
